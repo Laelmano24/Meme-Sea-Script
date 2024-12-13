@@ -241,6 +241,19 @@ function RaelHubMemeSea.AutoClickCat(value)
   end
 end
 
+function RaelHubMemeSea.ShowClickCat()
+  
+  local FloppaIsland = workspace.Island:FindFirstChild("FloppaIsland")
+  
+  if FloppaIsland then
+    local Popcat_Clickable = FloppaIsland:FindFirstChild("Popcat_Clickable")
+    
+    if Popcat_Clickable then
+      return Popcat_Clickable.Part.BillboardGui.Textlabel.Text
+    end
+  end
+end
+
 warn("All functions have been loaded")
 warn("Thank you for using Rael's modules (Laelmano24)")
 
