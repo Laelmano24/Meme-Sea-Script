@@ -216,9 +216,6 @@ function RaelHubMemeSea.AutoClicker(value)
   end)
 end
 
-warn("All functions have been loaded")
-warn("Thank you for using Rael's modules (Laelmano24)")
-
 RaelHubMemeSea.GetLevelAndQuest(true)
 
 -- Auto click cat
@@ -243,6 +240,8 @@ function RaelHubMemeSea.AutoClickCat(value)
     end
   end
 end
-  
+
+warn("All functions have been loaded")
+warn("Thank you for using Rael's modules (Laelmano24)")
 
 return RaelHubMemeSea
