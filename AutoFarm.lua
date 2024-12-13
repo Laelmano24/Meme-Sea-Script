@@ -9,13 +9,15 @@ local QuestLocaion = workspace.Location.QuestLocaion
 local QuestsNpc = workspace.NPCs.Quests_Npc
 local Monsters = workspace.Monster
 
-getgenv().EquipStyle = "Weapons" -- or melee
+getgenv().EquipStyle = "Weapons" -- or Melee
 getgenv().MonsterName = ""
 getgenv().NpcQuest = ""
 getgenv().HeightPlayer = 7
 getgenv().RaelHubGetLevel = true
 
-local ListMonster = loadstring(game:HttpGet("https://pastebin.com/raw/4hLd6CM2"))()
+local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
+
+local GetListMonsters = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
@@ -45,7 +47,7 @@ function RaelHubMemeSea.GetLevelAndQuest(value)
           if recommended and recommended.Visible then
             local Number =  GetNumberFromString(FloppasQuest.Name)
         
-            for i, valor in ipairs(ListMonster) do
+            for i, valor in ipairs(GetListMonsters) do
               if tostring(Number) == "23" or tostring(Number) == "29" or tostring(Number) == "32" then
               
                 local NewNumber = Number - 1
@@ -148,9 +150,20 @@ function Function_EquipStyle()
   local BackPack = LocalPlayer:FindFirstChild("Backpack")
   local Humanoid = Character:FindFirstChild("Humanoid")
   if BackPack and Humanoid then
-    local Tool = BackPack:FindFirstChild(getgenv().EquipStyle)
-    if Tool then
-      Humanoid:EquipTool(Tool)
+    if getgenv().EquipStyle == "Weapons" then
+      for _, Style in ipairs(GetFightingStyle.weapons) do
+        local Tool = BackPack:FindFirstChild(Style)
+        if Tool then
+          Humanoid:EquipTool(Tool)
+        end
+      end
+    elseif getgenv().EquipStyle == "Melee" then
+      for _, Style in ipairs(GetFightingStyle.melee) do
+        local Tool = BackPack:FindFirstChild(Style)
+        if Tool then
+          Humanoid:EquipTool(Tool)
+        end
+      end
     end
   end
 end

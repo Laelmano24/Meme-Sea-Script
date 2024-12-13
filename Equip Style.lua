@@ -1,6 +1,6 @@
-local RaelHubGetStyle = {}
+local GetFightingStyle = {}
 
-function RaelHubGetStyle.weapons()
+function GetFightingStyle.weapons()
   return {
     "Hanger",
     "Katana",
@@ -19,10 +19,10 @@ function RaelHubGetStyle.weapons()
   }
 end
 
-function RaelHubGetStyle.melee()
+function GetFightingStyle.melee()
   return {
     "Combat"
   }
 end
 
-return RaelHubGetStyle
+return GetFightingStyle
