@@ -1,5 +1,5 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/AutoFarm.lua')))()
 
 local Window = OrionLib:MakeWindow({Name = "[Name of your script]", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionMemeSea"})
 
