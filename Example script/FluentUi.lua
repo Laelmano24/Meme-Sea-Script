@@ -98,8 +98,8 @@ Tabs.Main:AddButton({
 })
 
 Tabs.Main:AddButton({
-  Title = "Pop cat",
-  Description = "Pop cat click: " .. RaelHubMemeSea.ShowClickCat(),
+  Title = "Show clicks cat",
+  Description = "",
   Callback = function()
     Fluent:Notify({
       Title = "Pop cat clicks: " .. RaelHubMemeSea.ShowClickCat(),

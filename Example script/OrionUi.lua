@@ -61,17 +61,6 @@ Main:AddToggle({
   end
 })
 Main:AddButton({
-	Name = "Show clicks",
-	Callback = function()
-    OrionLib:MakeNotification({
-	    Name = "Pop cat",
-	    Content = "Pop cat click: " .. RaelHubMemeSea.ShowClickCat(),
-	    Image = "rbxassetid://4483345998",
-	    Time = 5
-    })
-  end  
-})
-Main:AddButton({
 	Name = "Teleport to pop cat",
 	Callback = function()
     local FloppaIsland = workspace.Island:FindFirstChild("FloppaIsland")
@@ -84,10 +73,22 @@ Main:AddButton({
         if Part then
           local humanoidrootpart = PlayerCharacter:FindFirstChild("HumanoidRootPart")
           if humanoidrootpart then
-            humanoidrootpart.Cframe = CFrame.new(Part.Position)
+            humanoidrootpart.CFrame = CFrame.new(Part.Position)
           end
         end
       end
     end
+  end  
+})
+
+Main:AddButton({
+	Name = "Show clicks",
+	Callback = function()
+    OrionLib:MakeNotification({
+	    Name = "Pop cat",
+	    Content = "Pop cat click: " .. RaelHubMemeSea.ShowClickCat(),
+	    Image = "rbxassetid://4483345998",
+	    Time = 5
+    })
   end  
 })
