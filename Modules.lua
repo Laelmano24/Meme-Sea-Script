@@ -16,6 +16,9 @@ getgenv().HeightPlayer = 7
 getgenv().RaelHubGetLevel = true
 getgenv().RaelHubAutoFarm = false
 getgenv().RaelHubAutoClicker = false
+getgenv().RaelHubAutoClickCat = false
+
+-- Auto Farm
 
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
 
@@ -217,5 +220,29 @@ warn("All functions have been loaded")
 warn("Thank you for using Rael's modules (Laelmano24)")
 
 RaelHubMemeSea.GetLevelAndQuest(true)
+
+-- Auto click cat
+
+function RaelHubMemeSea.AutoClickCat(value)
+  
+  getgenv().RaelHubAutoClickCat = value
+  
+  local FloppaIsland = workspace.Island:FindFirstChild("FloppaIsland")
+  if FloppaIsland then
+    local Popcat_Clickable = FloppaIsland:FindFirstChild("FloppaIsland")
+    if Popcat_Clickable then
+      local ClickDetector = Popcat_Clickable.Part:FindFirstChild("ClickDetector")
+      if ClickDetector then
+        while getgenv().RaelHubAutoClickCat do
+        
+          fireclickdetector(ClickDetector)
+          task.wait(0.3)
+          
+        end
+      end
+    end
+  end
+end
+  
 
 return RaelHubMemeSea
