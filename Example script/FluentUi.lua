@@ -1,5 +1,5 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/AutoFarm.lua')))()
+local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/Modules.lua')))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
@@ -13,7 +13,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-  Main = Window:AddTab({ Title = "Main", Icon = "main" }),
+  Main = Window:AddTab({ Title = "Main", Icon = "house" }),
   Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -37,7 +37,7 @@ Tabs.Main:AddSlider("Player height", {
   Default = 7,
   Min = 5,
   Max = 15,
-  Rounding = 7,
+  Rounding = 10,
   Callback = function(Value)
     getgenv().HeightPlayer = Value
   end
@@ -60,6 +60,53 @@ Tabs.Main:AddToggle("Auto click", {
     
     RaelHubMemeSea.AutoClicker(Value)
     
+  end
+})
+
+Tabs.Main:AddSection("Pop cat click")
+
+Tabs.Main:AddToggle("Auto click cat", {
+  Title = "Auto click cat", 
+  Default = false,
+  Callback= function(Value)
+    
+    RaelHubMemeSea.AutoClickCat(Value)
+    
+  end
+})
+
+Tabs.Main:AddButton({
+  Title = "Teleport to pop cat",
+  Description = "",
+  Callback = function()
+    local FloppaIsland = workspace.Island:FindFirstChild("FloppaIsland")
+    local PlayerCharacter = game.Players.LocalPlayer.Character
+    if FloppaIsland then
+      local Popcat_Clickable = FloppaIsland:FindFirstChild("Popcat_Clickable")
+      if Popcat_Clickable then
+        local Part = Popcat_Clickable:FindFirstChild("Part")
+        
+        if Part then
+          local humanoidrootpart = PlayerCharacter:FindFirstChild("HumanoidRootPart")
+          if humanoidrootpart then
+            humanoidrootpart.Cframe = CFrame.new(Part.Position)
+          end
+        end
+      end
+    end
+  end
+})
+
+Tabs.Main:AddButton({
+  Title = "Pop cat",
+  Description = "Pop cat click: " .. RaelHubMemeSea.ShowClickCat(),
+  Callback = function()
+    Fluent:Notify({
+      Title = "Pop cat clicks: " .. RaelHubMemeSea.ShowClickCat(),
+      Content = "",
+      SubContent = "",
+      Duration = 3
+    })
   end
 })
 

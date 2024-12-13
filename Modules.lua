@@ -224,21 +224,13 @@ function RaelHubMemeSea.AutoClickCat(value)
   
   getgenv().RaelHubAutoClickCat = value
   
-  local FloppaIsland = workspace.Island:FindFirstChild("FloppaIsland")
-  if FloppaIsland then
-    local Popcat_Clickable = FloppaIsland:FindFirstChild("FloppaIsland")
-    if Popcat_Clickable then
-      local ClickDetector = Popcat_Clickable.Part:FindFirstChild("ClickDetector")
-      if ClickDetector then
-        while getgenv().RaelHubAutoClickCat do
-        
-          fireclickdetector(ClickDetector)
-          task.wait(0.3)
+  while getgenv().RaelHubAutoClickCat do
+    
+    fireclickdetector(workspace.Island.FloppaIsland.Popcat_Clickable.Part.ClickDetector)
+    task.wait(0.3)
           
-        end
-      end
-    end
   end
+  
 end
 
 function RaelHubMemeSea.ShowClickCat()
