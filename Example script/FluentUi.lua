@@ -37,7 +37,7 @@ Tabs.Main:AddSlider("Player height", {
   Default = 7,
   Min = 5,
   Max = 15,
-  Rounding = 10,
+  Rounding = 0,
   Callback = function(Value)
     getgenv().HeightPlayer = Value
   end
