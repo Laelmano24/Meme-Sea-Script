@@ -151,14 +151,15 @@ function Function_EquipStyle()
   local Humanoid = Character:FindFirstChild("Humanoid")
   if BackPack and Humanoid then
     if getgenv().EquipStyle == "Weapons" then
-      for _, Style in ipairs(GetFightingStyle.weapons) do
+      for _, Style in ipairs(GetFightingStyle.weapons()) do
         local Tool = BackPack:FindFirstChild(Style)
         if Tool then
           Humanoid:EquipTool(Tool)
         end
       end
     elseif getgenv().EquipStyle == "Melee" then
-      for _, Style in ipairs(GetFightingStyle.melee) do
+      
+      for _, Style in ipairs(GetFightingStyle.melee()) do
         local Tool = BackPack:FindFirstChild(Style)
         if Tool then
           Humanoid:EquipTool(Tool)
@@ -215,4 +216,4 @@ warn("Thank you for using Rael's modules (Laelmano24)")
 
 RaelHubMemeSea.GetLevelAndQuest(true)
 
-RaelHubMemeSea.AutoFarm(true)
+return RaelHubMemeSea
