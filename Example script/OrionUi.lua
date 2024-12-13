@@ -57,7 +57,7 @@ Main:AddToggle({
   Name = "Auto click cat",
   Default = false,
   Callback = function(Value)
-    RaelHubMemeSea.AutoFarm(Value)
+    RaelHubMemeSea.AutoClickCat(Value)
   end
 })
 Main:AddButton({

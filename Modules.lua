@@ -227,7 +227,7 @@ function RaelHubMemeSea.AutoClickCat(value)
   while getgenv().RaelHubAutoClickCat do
     
     fireclickdetector(workspace.Island.FloppaIsland.Popcat_Clickable.Part.ClickDetector)
-    task.wait(0.3)
+    task.wait(0.005)
           
   end
   
