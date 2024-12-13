@@ -89,7 +89,7 @@ Tabs.Main:AddButton({
         if Part then
           local humanoidrootpart = PlayerCharacter:FindFirstChild("HumanoidRootPart")
           if humanoidrootpart then
-            humanoidrootpart.Cframe = CFrame.new(Part.Position)
+            humanoidrootpart.CFrame = CFrame.new(Part.Position)
           end
         end
       end
