@@ -9,11 +9,13 @@ local QuestLocaion = workspace.Location.QuestLocaion
 local QuestsNpc = workspace.NPCs.Quests_Npc
 local Monsters = workspace.Monster
 
-getgenv().EquipStyle = "Weapons" -- or Melee
+getgenv().EquipStyle = "Melee" -- or Weapons
 getgenv().MonsterName = ""
 getgenv().NpcQuest = ""
 getgenv().HeightPlayer = 7
 getgenv().RaelHubGetLevel = true
+getgenv().RaelHubAutoFarm = false
+getgenv().RaelHubAutoClicker = false
 
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
 
