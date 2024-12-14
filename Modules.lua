@@ -355,13 +355,12 @@ function CheckBossLordSus(boss)
       getgenv().MonsterName = "Lord Sus"
       getgenv().NpcQuest = "Floppa Quest 32"
       GetQuestBossSelected(getgenv().NpcQuest)
-      task.wait()
       TeleportToBossSelected(Monsters:FindFirstChild("Lord Sus"))
     else
       getgenv().MonsterName = "Sus Duck"
       getgenv().NpcQuest = "Floppa Quest 31"
       for _, Monster in ipairs(Monsters:GetChildren()) do
-        if Monster == "Sus Duck" then
+        if Monster == getgenv().MonsterName then
           GetQuestBossSelected(getgenv().NpcQuest)
           TeleportToBossSelected(Monster)
           
