@@ -295,7 +295,6 @@ function RaelHubMemeSea.AutoFarmMonsterSelected(monster, value)
 
               GetQuestSelected(getgenv().NpcQuest)
 
-              -- Loop para encontrar e teleportar ao monstro
               for _, Monstro in ipairs(Monsters:GetChildren()) do
                 if Monstro and Monstro.Name == ValueMonster then
                   TeleportToMonsterSelected(Monstro)
@@ -308,7 +307,7 @@ function RaelHubMemeSea.AutoFarmMonsterSelected(monster, value)
           break
         end
       end
-      task.wait() -- Intervalo para evitar uso excessivo de recursos
+      task.wait()
     end
   end)
 end
