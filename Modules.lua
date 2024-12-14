@@ -417,9 +417,9 @@ function CheckItemSummon(item)
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if humanoidrootpart then
         humanoidrootpart.CFrame = CFrame.new(Summon.Position)
-        task.wait(1)
-        fireproximityprompt(Summon.SummonPrompt)
         task.wait(0.5)
+        fireproximityprompt(Summon.SummonPrompt)
+        task.wait(0.3)
         getgenv().ActiveCheckDistance = true
         return true
       end
