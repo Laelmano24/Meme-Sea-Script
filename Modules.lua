@@ -314,11 +314,12 @@ function TeleportToBossSelected(monster)
     if monster then
       local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
       if HumanoidRootPart then
-        local position = HumanoidRootPart.Position + Vector3.new(0, getgenv().HeightPlayer, 0)
-        local rotation = CFrame.Angles(math.rad(-90), math.rad(0), math.rad(180))
+        local position = HumanoidRootPart.Position
+        local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
+        local rotation = Vector3.new(-90, 0, 180)
 
         if Character and Character:FindFirstChild("HumanoidRootPart") then
-          Character.HumanoidRootPart.CFrame = CFrame.new(position) * rotation
+          Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
         end
       end
       task.wait()
@@ -327,20 +328,38 @@ function TeleportToBossSelected(monster)
   end)
 end
 
-function CheckItem(item)
+function CheckItemSummon(item)
   local ItemSummon = LocalPlayer.Items.ItemStorage:FindFirstChild(item)
-  if ItemSummon and item == "Sussy Orb" and ItemSummon.Value > 0 then
-    local Summon = workspace.Island.ForgottenIsland.Summon3.Summon
-    local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
-    if humanoidrootpart then
-      humanoidrootpart.CFrame = CFrame.new(Summon.Position)
-      task.wait(0.5)
-      fireproximityprompt(Summon.SummonPrompt)
-      return true
+  if ItemSummon and ItemSummon.Value == 0 then
+  
+  
+    if item == "Sussy Orb" then
+      getgenv().MonsterName = "Sus Duck"
+      getgenv().NpcQuest = "Floppa Quest 31"
+      
+      GetQuestBossSelected(getgenv().NpcQuest)
+      for _, Monster in ipairs(Monsters:GetChildren()) do
+        if Monster.Name == "Sus Duck" then
+          TeleportToBossSelected(Monster)
+          if ItemSummon.Value > 0 or Monsters:FindFirstChild("Lord Sus") then
+            break
+          end
+        end
+      end
+    end
+      
+  elseif ItemSummon and ItemSummon.Value > 0 then
+    if item == "Sussy Orb" then
+      local Summon = workspace.Island.ForgottenIsland.Summon3.Summon
+      local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+      if humanoidrootpart then
+        humanoidrootpart.CFrame = CFrame.new(Summon.Position)
+        task.wait(0.5)
+        fireproximityprompt(Summon.SummonPrompt)
+        return true
+      end
     end
   end
-  print("Falso")
-  return false
 end
 
 function CheckBossLordSus(boss)
@@ -351,34 +370,14 @@ function CheckBossLordSus(boss)
     GetQuestBossSelected(getgenv().NpcQuest)
     TeleportToBossSelected(Boss)
   else
-    local FunctionCheck = CheckItem("Sussy Orb")
+    local FunctionCheck = CheckItemSummon("Sussy Orb")
     if FunctionCheck then
+      
       getgenv().MonsterName = "Lord Sus"
       getgenv().NpcQuest = "Floppa Quest 32"
       GetQuestBossSelected(getgenv().NpcQuest)
-      TeleportToBossSelected(Monsters:FindFirstChild("Lord Sus"))
-    elseif FunctionCheck == false then
-      for indexMonster, ValueMonster in ipairs(GetListMonsters or {}) do
-        if ValueMonster == "Sus Duck" then
-          for indexQuest, ValueQuest in ipairs(GetListQuest or {}) do
-            if indexMonster == indexQuest then
-              getgenv().MonsterName = ValueMonster
-              getgenv().NpcQuest = ValueQuest
-
-              GetQuestSelected(getgenv().NpcQuest)
-
-              for _, Monstro in ipairs(Monsters:GetChildren()) do
-                if Monstro and Monstro.Name == ValueMonster then
-                  TeleportToBossSelected(Monstro)
-                  break
-                end
-              end
-              break
-            end
-          end
-          break
-        end
-      end
+      TeleportToBossSelected(Boss)
+      
     end
   end
 end
