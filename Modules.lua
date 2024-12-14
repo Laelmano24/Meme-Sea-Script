@@ -16,6 +16,7 @@ getgenv().HeightPlayer = 7
 getgenv().RaelHubGetLevel = true
 getgenv().RaelHubAutoFarm = false
 getgenv().RaelHubAutoFarmSelected = false
+getgenv().RaelHubAutoFarmBossSelected = false
 getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
 
@@ -219,32 +220,12 @@ function RaelHubMemeSea.AutoClicker(value)
   end)
 end
 
-RaelHubMemeSea.GetLevelAndQuest(true)
+RaelHubMemeSea.GetLevelAndQuest(false)
 
 -- Auto farm with the selected monster
 
-function CheckQuestSelected()
-  local questgiver = QuestScreen:FindFirstChild("QuestGiver")
-  if questgiver and QuestScreen.Visible and questgiver.Text == getgenv().NpcQuest then
-    return true
-  else
-    if questgiver and QuestScreen.Visible and questgiver.Text ~= getgenv().NpcQuest then
-      task.wait(0.3)
-      local args = {
-        [1] = "Abandon_Quest",
-        [2] = {
-          ["QuestSlot"] = "QuestSlot1"
-        }
-      }
-
-      game:GetService("ReplicatedStorage").OtherEvent.QuestEvents.Quest:FireServer(unpack(args))
-    end
-    return false
-  end
-end
-
 function GetQuestSelected(npcquest)
-  while getgenv().RaelHubAutoFarmSelected and not CheckQuestSelected() do
+  while getgenv().RaelHubAutoFarmSelected and not CheckQuest() do
     local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
     if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
       Character:MoveTo(QuestLocaion[npcquest].Position)
@@ -310,6 +291,111 @@ function RaelHubMemeSea.AutoFarmMonsterSelected(monster, value)
       task.wait()
     end
   end)
+end
+-- Auto farm boss selected
+
+function GetQuestBossSelected(npcquest)
+  while getgenv().RaelHubAutoFarmBossSelected and not CheckQuest() do
+    local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+    if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
+      Character:MoveTo(QuestLocaion[npcquest].Position)
+      task.wait()
+      if QuestsNpc:FindFirstChild(npcquest) then
+        fireproximityprompt(QuestsNpc[npcquest].Block.QuestPrompt)
+      end
+    end
+    task.wait()
+  end
+end
+
+function TeleportToBossSelected(monster)
+  pcall(function()
+  while monster.Parent and getgenv().RaelHubAutoFarmBossSelected and CheckQuest() do
+    if monster then
+      local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
+      if HumanoidRootPart then
+        local position = HumanoidRootPart.Position + Vector3.new(0, getgenv().HeightPlayer, 0)
+        local rotation = CFrame.Angles(math.rad(-90), math.rad(0), math.rad(180))
+
+        if Character and Character:FindFirstChild("HumanoidRootPart") then
+          Character.HumanoidRootPart.CFrame = CFrame.new(position) * rotation
+        end
+      end
+      task.wait()
+    end
+  end
+  end)
+end
+
+function CheckItem(item)
+  local ItemSummon = LocalPlayer.Items.ItemStorage:FindFirstChild(item)
+  if ItemSummon and item == "Sussy Orb" then
+    local Summon = workspace.Island.ForgottenIsland.Summon3.Summon
+    local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+    if humanoidrootpart then
+      humanoidrootpart.CFrame = CFrame.new(Summon.Position)
+      task.wait(0.5)
+      fireproximityprompt(Summon.SummonPrompt)
+      return true
+    end
+  end
+  return false
+end
+
+function CheckBossLordSus(boss)
+  local Boss = Monsters:FindFirstChild(boss)
+  if Boss and Boss.Name == "Lord Sus" then
+    getgenv().MonsterName = "Lord Sus"
+    getgenv().NpcQuest = "Floppa Quest 32"
+    task.spawn(function()
+      while getgenv().RaelHubAutoFarmBossSelected do
+        Function_EquipStyle()
+        CheckDistance()
+        task.wait()
+      end
+    end)
+    GetQuestBossSelected(getgenv().NpcQuest)
+    TeleportToBossSelected(Boss)
+  else
+    local FunctionCheck = CheckItem("Sussy Orb")
+    if FunctionCheck then
+      getgenv().MonsterName = "Lord Sus"
+      getgenv().NpcQuest = "Floppa Quest 32"
+      GetQuestBossSelected(getgenv().NpcQuest)
+      task.wait()
+      TeleportToBossSelected(Monsters:FindFirstChild("Lord Sus"))
+    else
+      getgenv().MonsterName = "Sus Duck"
+      getgenv().NpcQuest = "Floppa Quest 31"
+      task.spawn(function()
+        while getgenv().RaelHubAutoFarmBossSelected do
+          Function_EquipStyle()
+          CheckDistance()
+          task.wait()
+        end
+      end)
+      for _, Monster in ipairs(Monsters:GetChildren()) do
+        if Monster == "Sus Duck" then
+          GetQuestBossSelected(getgenv().NpcQuest)
+          TeleportToBossSelected(Monster)
+          
+        end
+      end
+    end
+  end
+end
+
+function RaelHubMemeSea.AutoFarmBoss(boss, value)
+  
+  getgenv().RaelHubAutoFarmBossSelected = value
+  
+  while getgenv().RaelHubAutoFarmBossSelected do
+    if boss == "Lord Sus" then
+      CheckBossLordSus("Lord Sus")
+    end
+    task.wait(1)
+  end
+  
 end
 -- Auto click cat
 
