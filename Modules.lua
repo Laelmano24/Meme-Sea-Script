@@ -400,7 +400,7 @@ function CheckItemSummon(item)
         return true
       end
     elseif item == "Noob Head" then
-      local Summon = workspace.Island.PumpkinIsland.Summon1.Summon
+      local Summon = workspace.Island.MoaiIsland.Summon2.Summon
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if humanoidrootpart then
         humanoidrootpart.CFrame = CFrame.new(Summon.Position)
