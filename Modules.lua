@@ -24,7 +24,7 @@ getgenv().RaelHubAutoClickCat = false
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
 
 local GetListMonsters = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
-local GetListQuest = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
+local GetListQuest = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/GetListQuest.lua"))()
 
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
@@ -36,7 +36,7 @@ function RaelHubMemeSea.GetLevelAndQuest(value)
   getgenv().RaelHubGetLevel = value
   
   task.spawn(function()
-    while getgenv().RaelHubGetLevel do
+    while getgenv().RaelHubGetLevel and getgenv().RaelHubAutoFarmSelected == false do
   
       local QuestFloppas = PlayerGui.GameGui.Compass.Main.Container.Quest.Container
   
@@ -223,6 +223,40 @@ RaelHubMemeSea.GetLevelAndQuest(true)
 
 -- Auto farm with the selected monster
 
+function CheckQuestSelected()
+  local questgiver = QuestScreen:FindFirstChild("QuestGiver")
+  if questgiver and QuestScreen.Visible and questgiver.Text == getgenv().NpcQuest then
+    return true
+  else
+    if questgiver and QuestScreen.Visible and questgiver.Text ~= getgenv().NpcQuest then
+      task.wait(0.3)
+      local args = {
+        [1] = "Abandon_Quest",
+        [2] = {
+          ["QuestSlot"] = "QuestSlot1"
+        }
+      }
+
+      game:GetService("ReplicatedStorage").OtherEvent.QuestEvents.Quest:FireServer(unpack(args))
+    end
+    return false
+  end
+end
+
+function GetQuestSelected(npcquest)
+  while getgenv().RaelHubAutoFarmSelected and not CheckQuestSelected() do
+    local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+    if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
+      Character:MoveTo(QuestLocaion[npcquest].Position)
+      task.wait()
+      if QuestsNpc:FindFirstChild(npcquest) then
+        fireproximityprompt(QuestsNpc[npcquest].Block.QuestPrompt)
+      end
+    end
+    task.wait()
+  end
+end
+
 function TeleportToMonsterSelected(monster)
   while monster.Parent and getgenv().RaelHubAutoFarmSelected and CheckQuest() do
     if monster then
@@ -241,11 +275,43 @@ function TeleportToMonsterSelected(monster)
   end
 end
 
-function AutoFarmMonsterSelected(monster, value)
+function RaelHubMemeSea.AutoFarmMonsterSelected(monster, value)
   getgenv().RaelHubAutoFarmSelected = value
-  while getgenv().RaelHubAutoFarmSelected do
-    for i, monster in ipairs()
+  task.spawn(function()
+    while getgenv().RaelHubAutoFarmSelected do
+      for indexMonster, ValueMonster in ipairs(GetListMonsters or {}) do
+        if ValueMonster == monster then
+          for indexQuest, ValueQuest in ipairs(GetListQuest or {}) do
+            if indexMonster == indexQuest then
+              getgenv().MonsterName = ValueMonster
+              getgenv().NpcQuest = ValueQuest
+              task.spawn(function()
+                while getgenv().RaelHubAutoFarmSelected do
+                  Function_EquipStyle()
+                  CheckDistance()
+                  task.wait()
+                end
+              end)
 
+              GetQuestSelected(getgenv().NpcQuest)
+
+              -- Loop para encontrar e teleportar ao monstro
+              for _, Monstro in ipairs(Monsters:GetChildren()) do
+                if Monstro and Monstro.Name == ValueMonster then
+                  TeleportToMonsterSelected(Monstro)
+                  break
+                end
+              end
+              break
+            end
+          end
+          break
+        end
+      end
+      task.wait() -- Intervalo para evitar uso excessivo de recursos
+    end
+  end)
+end
 -- Auto click cat
 
 function RaelHubMemeSea.AutoClickCat(value)
