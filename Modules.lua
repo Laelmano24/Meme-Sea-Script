@@ -19,7 +19,7 @@ getgenv().RaelHubAutoFarmSelected = false
 getgenv().RaelHubAutoFarmBossSelected = false
 getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
-
+getgenv().ActiveCheckDistance = true
 -- Auto Farm
 
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
@@ -149,7 +149,7 @@ function CheckDistance()
     
     local Distance = (PlayerPosition - MonsterPosition).Magnitude
     
-    if Distance >= 500 then
+    if Distance >= 500 and getgenv().ActiveCheckDistance then
       humanoidrootpart.CFrame = CFrame.new(MonsterPosition)
     end
   end
@@ -412,12 +412,15 @@ function CheckItemSummon(item)
       
       
     elseif item == "Noob Head" then
+      getgenv().ActiveCheckDistance = false
       local Summon = workspace.Island.MoaiIsland.Summon2.Summon
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if humanoidrootpart then
         humanoidrootpart.CFrame = CFrame.new(Summon.Position)
-        task.wait(2)
+        task.wait(1)
         fireproximityprompt(Summon.SummonPrompt)
+        task.wait(0.5)
+        getgenv().ActiveCheckDistance = true
         return true
       end
     end
