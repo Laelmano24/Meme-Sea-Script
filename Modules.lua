@@ -348,6 +348,8 @@ function CheckItemSummon(item)
           end
         end
       end
+      
+      
     elseif item == "Flame Orb" then
       getgenv().MonsterName = "Scary Skull"
       getgenv().NpcQuest = "Floppa Quest 22"
@@ -363,6 +365,9 @@ function CheckItemSummon(item)
           end
         end
       end
+      
+      
+      
     elseif item == "Noob Head" then
       getgenv().MonsterName = "Moai"
       getgenv().NpcQuest = "Floppa Quest 28"
@@ -378,9 +383,10 @@ function CheckItemSummon(item)
           end
         end
       end
-    end
       
-  elseif ItemSummon and ItemSummon.Value > 0 then
+    elseif ItemSummon and ItemSummon.Value > 0 then
+  
+  
     if item == "Sussy Orb" then
       local Summon = workspace.Island.ForgottenIsland.Summon3.Summon
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
@@ -390,6 +396,9 @@ function CheckItemSummon(item)
         fireproximityprompt(Summon.SummonPrompt)
         return true
       end
+      
+      
+      
     elseif item == "Flame Orb" then
       local Summon = workspace.Island.PumpkinIsland.Summon1.Summon
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
@@ -399,6 +408,8 @@ function CheckItemSummon(item)
         fireproximityprompt(Summon.SummonPrompt)
         return true
       end
+      
+      
     elseif item == "Noob Head" then
       local Summon = workspace.Island.MoaiIsland.Summon2.Summon
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
@@ -409,6 +420,8 @@ function CheckItemSummon(item)
         return true
       end
     end
+    
+    
   end
 end
 
@@ -456,7 +469,6 @@ function CheckBossEvilNoob()
   local Boss = Monsters:FindFirstChild("Evil Noob")
   if Boss then
     getgenv().MonsterName = "Evil Noob"
-    
     getgenv().NpcQuest = "Floppa Quest 29"
     GetQuestBossSelected(getgenv().NpcQuest)
     TeleportToBossSelected(Boss)
