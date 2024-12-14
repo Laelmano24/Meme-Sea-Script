@@ -341,7 +341,9 @@ function CheckItemSummon(item)
       for _, Monster in ipairs(Monsters:GetChildren()) do
         if Monster.Name == "Sus Duck" then
           TeleportToBossSelected(Monster)
-          if ItemSummon.Value > 0 or Monsters:FindFirstChild("Lord Sus") then
+          if ItemSummon.Value > 0 then
+            break
+          elseif Monsters:FindFirstChild("Lord Sus") then
             break
           end
         end
@@ -362,9 +364,9 @@ function CheckItemSummon(item)
   end
 end
 
-function CheckBossLordSus(boss)
-  local Boss = Monsters:FindFirstChild(boss)
-  if Boss and Boss.Name == "Lord Sus" then
+function CheckBossLordSus()
+  local Boss = Monsters:FindFirstChild("Lord Sus")
+  if Boss then
     getgenv().MonsterName = "Lord Sus"
     getgenv().NpcQuest = "Floppa Quest 32"
     GetQuestBossSelected(getgenv().NpcQuest)
@@ -394,9 +396,9 @@ function RaelHubMemeSea.AutoFarmBoss(boss, value)
   end)
   while getgenv().RaelHubAutoFarmBossSelected do
     if boss == "Lord Sus" then
-      CheckBossLordSus("Lord Sus")
+      CheckBossLordSus()
     end
-    task.wait(1)
+    task.wait()
   end
   
 end
