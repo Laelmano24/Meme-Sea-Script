@@ -339,6 +339,7 @@ function CheckItem(item)
       return true
     end
   end
+  print("Falso")
   return false
 end
 
@@ -356,20 +357,26 @@ function CheckBossLordSus(boss)
       getgenv().NpcQuest = "Floppa Quest 32"
       GetQuestBossSelected(getgenv().NpcQuest)
       TeleportToBossSelected(Monsters:FindFirstChild("Lord Sus"))
-    else
-      getgenv().MonsterName = "Sus Duck"
-      getgenv().NpcQuest = "Floppa Quest 32"
-      
-      local MonsterMob = workspace.Monster
-      
-      GetQuestBossSelected(getgenv().NpcQuest)
-      
-      print(getgenv().MonsterName)
-      
-      for _, Monster in ipairs(MonsterMob:GetChildren()) do
-        if Monster == getgenv().MonsterName then
-          TeleportToBossSelected(Monster)
-          
+    elseif FunctionCheck == false then
+      for indexMonster, ValueMonster in ipairs(GetListMonsters or {}) do
+        if ValueMonster == "Sus Duck" then
+          for indexQuest, ValueQuest in ipairs(GetListQuest or {}) do
+            if indexMonster == indexQuest then
+              getgenv().MonsterName = ValueMonster
+              getgenv().NpcQuest = ValueQuest
+
+              GetQuestSelected(getgenv().NpcQuest)
+
+              for _, Monstro in ipairs(Monsters:GetChildren()) do
+                if Monstro and Monstro.Name == ValueMonster then
+                  TeleportToBossSelected(Monstro)
+                  break
+                end
+              end
+              break
+            end
+          end
+          break
         end
       end
     end
