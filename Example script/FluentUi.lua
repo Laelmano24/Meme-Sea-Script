@@ -78,7 +78,7 @@ Tabs.Main:AddDropdown("List monster", {
   Title = "List monster",
   Values = GetListMonsters,
   Multi = false,
-  Default = "Floppa",
+  Default = "...",
   Callback = function(Value)
     
     ListMonsterDropDown = Value
@@ -95,6 +95,32 @@ Tabs.Main:AddToggle("Auto farm monster selected", {
       Autofarmtoggle:SetValue(false)
     end
     RaelHubMemeSea.AutoFarmMonsterSelected(ListMonsterDropDown, Value)
+    
+  end
+})
+
+local ListBossDropDown
+
+Tabs.Main:AddSection("Auto farm boss")
+
+Tabs.Main:AddDropdown("List Boss", {
+  Title = "List Boss",
+  Values = {"Giant Pumpkin", "Evil Noob", "Lord Sus"},
+  Multi = false,
+  Default = "...",
+  Callback = function(Value)
+    
+    ListBossDropDown = Value
+    
+  end
+})
+
+Tabs.Main:AddToggle("Auto farm boss", {
+  Title = "Auto farm boss", 
+  Default = false,
+  Callback= function(Value)
+    
+    RaelHubMemeSea.AutoFarmBoss(ListBossDropDown, Value)
     
   end
 })
