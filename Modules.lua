@@ -329,7 +329,7 @@ end
 
 function CheckItem(item)
   local ItemSummon = LocalPlayer.Items.ItemStorage:FindFirstChild(item)
-  if ItemSummon and item == "Sussy Orb" then
+  if ItemSummon and item == "Sussy Orb" and ItemSummon.Value > 0 then
     local Summon = workspace.Island.ForgottenIsland.Summon3.Summon
     local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
     if humanoidrootpart then
@@ -347,13 +347,6 @@ function CheckBossLordSus(boss)
   if Boss and Boss.Name == "Lord Sus" then
     getgenv().MonsterName = "Lord Sus"
     getgenv().NpcQuest = "Floppa Quest 32"
-    task.spawn(function()
-      while getgenv().RaelHubAutoFarmBossSelected do
-        Function_EquipStyle()
-        CheckDistance()
-        task.wait()
-      end
-    end)
     GetQuestBossSelected(getgenv().NpcQuest)
     TeleportToBossSelected(Boss)
   else
@@ -367,13 +360,6 @@ function CheckBossLordSus(boss)
     else
       getgenv().MonsterName = "Sus Duck"
       getgenv().NpcQuest = "Floppa Quest 31"
-      task.spawn(function()
-        while getgenv().RaelHubAutoFarmBossSelected do
-          Function_EquipStyle()
-          CheckDistance()
-          task.wait()
-        end
-      end)
       for _, Monster in ipairs(Monsters:GetChildren()) do
         if Monster == "Sus Duck" then
           GetQuestBossSelected(getgenv().NpcQuest)
@@ -388,7 +374,13 @@ end
 function RaelHubMemeSea.AutoFarmBoss(boss, value)
   
   getgenv().RaelHubAutoFarmBossSelected = value
-  
+  task.spawn(function()
+    while getgenv().RaelHubAutoFarmBossSelected do
+      Function_EquipStyle()
+      CheckDistance()
+      task.wait()
+    end
+  end)
   while getgenv().RaelHubAutoFarmBossSelected do
     if boss == "Lord Sus" then
       CheckBossLordSus("Lord Sus")
@@ -407,7 +399,7 @@ function RaelHubMemeSea.AutoClickCat(value)
     
     fireclickdetector(workspace.Island.FloppaIsland.Popcat_Clickable.Part.ClickDetector)
     task.wait(0.005)
-          
+    
   end
   
 end
