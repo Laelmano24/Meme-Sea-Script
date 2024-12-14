@@ -383,8 +383,9 @@ function CheckItemSummon(item)
           end
         end
       end
+    end
       
-    elseif ItemSummon and ItemSummon.Value > 0 then
+  elseif ItemSummon and ItemSummon.Value > 0 then
   
   
     if item == "Sussy Orb" then
@@ -420,8 +421,6 @@ function CheckItemSummon(item)
         return true
       end
     end
-    
-    
   end
 end
 
