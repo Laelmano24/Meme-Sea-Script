@@ -461,7 +461,7 @@ function CheckBossEvilNoob()
     GetQuestBossSelected(getgenv().NpcQuest)
     TeleportToBossSelected(Boss)
   else
-    local FunctionCheck = CheckItemSummon("Flame Orb")
+    local FunctionCheck = CheckItemSummon("Noob Head")
     if FunctionCheck then
       
       getgenv().MonsterName = "Evil Noob"
