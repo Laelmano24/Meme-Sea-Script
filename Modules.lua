@@ -218,6 +218,26 @@ end
 
 RaelHubMemeSea.GetLevelAndQuest(true)
 
+-- Auto farm with the selected monster
+
+function TeleportToMonsterSelected(monster)
+  while monster.Parent and getgenv().RaelHubAutoFarmSelected and CheckQuest() do
+    if monster then
+      local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
+      if HumanoidRootPart then
+        local position = HumanoidRootPart.Position
+        local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
+        local rotation = Vector3.new(-90, 0, 180)
+
+        if Character and Character:FindFirstChild("HumanoidRootPart") then
+          Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
+        end
+      end
+      task.wait()
+    end
+  end
+end
+
 -- Auto click cat
 
 function RaelHubMemeSea.AutoClickCat(value)
