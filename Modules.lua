@@ -416,7 +416,7 @@ function CheckItemSummon(item)
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if humanoidrootpart then
         humanoidrootpart.CFrame = CFrame.new(Summon.Position)
-        task.wait(0.5)
+        task.wait(2)
         fireproximityprompt(Summon.SummonPrompt)
         return true
       end
