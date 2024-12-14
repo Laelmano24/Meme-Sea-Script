@@ -141,7 +141,7 @@ end
 function CheckDistance()
   
  local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
-  local MonsterPart = workspace.Location.Enemy_Location[getgenv().MonsterName]
+  local MonsterPart = workspace.Location.Enemy_Location:FindFirstChild(getgenv().MonsterName)
   
   if MonsterPart and humanoidrootpart then
     local PlayerPosition = humanoidrootpart.Position
