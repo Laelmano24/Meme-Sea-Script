@@ -15,6 +15,7 @@ getgenv().NpcQuest = ""
 getgenv().HeightPlayer = 7
 getgenv().RaelHubGetLevel = true
 getgenv().RaelHubAutoFarm = false
+getgenv().RaelHubAutoFarmSelected = false
 getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
 
@@ -23,6 +24,8 @@ getgenv().RaelHubAutoClickCat = false
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
 
 local GetListMonsters = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
+local GetListQuest = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
+
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
@@ -237,6 +240,11 @@ function TeleportToMonsterSelected(monster)
     end
   end
 end
+
+function AutoFarmMonsterSelected(monster, value)
+  getgenv().RaelHubAutoFarmSelected = value
+  while getgenv().RaelHubAutoFarmSelected do
+    for i, monster in ipairs()
 
 -- Auto click cat
 
