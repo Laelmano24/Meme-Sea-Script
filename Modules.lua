@@ -57,7 +57,7 @@ function RaelHubMemeSea.GetLevelAndQuest(value)
             local Number =  GetNumberFromString(FloppasQuest.Name)
         
             for i, valor in ipairs(GetListMonsters) do
-              if tostring(Number) == "23" or tostring(Number) == "" or tostring(Number) == "32" then
+              if tostring(Number) == "23" or tostring(Number) == "29" or tostring(Number) == "32" then
               
                 local NewNumber = Number - 1
               
@@ -363,6 +363,21 @@ function CheckItemSummon(item)
           end
         end
       end
+    elseif item == "Noob Head" then
+      getgenv().MonsterName = "Moai"
+      getgenv().NpcQuest = "Floppa Quest 28"
+      
+      GetQuestBossSelected(getgenv().NpcQuest)
+      for _, Monster in ipairs(Monsters:GetChildren()) do
+        if Monster.Name == "Moai" then
+          TeleportToBossSelected(Monster)
+          if ItemSummon.Value > 0 then
+            break
+          elseif Monsters:FindFirstChild("Evil Noob") then
+            break
+          end
+        end
+      end
     end
       
   elseif ItemSummon and ItemSummon.Value > 0 then
@@ -376,6 +391,15 @@ function CheckItemSummon(item)
         return true
       end
     elseif item == "Flame Orb" then
+      local Summon = workspace.Island.PumpkinIsland.Summon1.Summon
+      local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+      if humanoidrootpart then
+        humanoidrootpart.CFrame = CFrame.new(Summon.Position)
+        task.wait(0.5)
+        fireproximityprompt(Summon.SummonPrompt)
+        return true
+      end
+    elseif item == "Noob Head" then
       local Summon = workspace.Island.PumpkinIsland.Summon1.Summon
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if humanoidrootpart then
@@ -428,6 +452,27 @@ function CheckBossPumpkin()
   end
 end
 
+function CheckBossEvilNoob()
+  local Boss = Monsters:FindFirstChild("Evil Noob")
+  if Boss then
+    getgenv().MonsterName = "Evil Noob"
+    
+    getgenv().NpcQuest = "Floppa Quest 29"
+    GetQuestBossSelected(getgenv().NpcQuest)
+    TeleportToBossSelected(Boss)
+  else
+    local FunctionCheck = CheckItemSummon("Flame Orb")
+    if FunctionCheck then
+      
+      getgenv().MonsterName = "Evil Noob"
+      getgenv().NpcQuest = "Floppa Quest 29"
+      GetQuestBossSelected(getgenv().NpcQuest)
+      TeleportToBossSelected(Boss)
+      
+    end
+  end
+end
+
 function RaelHubMemeSea.AutoFarmBoss(boss, value)
   
   getgenv().RaelHubAutoFarmBossSelected = value
@@ -443,6 +488,8 @@ function RaelHubMemeSea.AutoFarmBoss(boss, value)
       CheckBossLordSus()
     elseif boss == "Giant Pumpkin" then
       CheckBossPumpkin()
+    elseif boss == "Evil Noob" then
+      CheckBossEvilNoob()
     end
     task.wait()
   end
