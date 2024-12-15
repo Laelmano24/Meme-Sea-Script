@@ -23,6 +23,9 @@ getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
 getgenv().ActiveCheckDistance = true
 getgenv().GetQuestValue = true
+getgenv().AutoRollFruitMoney = false
+getgenv().AutoRollFruitGem = false
+getgenv().DelayRollFruit = 1
 -- Auto Farm
 
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
@@ -635,6 +638,41 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
     end
   end)
 end
+
+function RaelHubMemeSea.AutoRollFruitMoney(value)
+  getgenv().AutoRollFruitMoney = value
+  while getgenv().AutoRollFruitMoney do
+    local args = {
+      [1] = "Random_Power",
+      [2] = {
+        ["Type"] = "Once",
+        ["NPCName"] = "Floppa Gacha",
+        ["GachaType"] = "Money"
+      }
+    }
+
+    game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
+    task.wait(getgenv().DelayRollFruit)
+  end
+end
+
+function RaelHubMemeSea.AutoRollFruitGem(value)
+  getgenv().AutoRollFruitGem = value
+  while getgenv().AutoRollFruitGem do
+    local args = {
+      [1] = "Random_Power",
+      [2] = {
+        ["Type"] = "Once",
+        ["NPCName"] = "Doge Gacha",
+        ["GachaType"] = "Gem"
+      }
+    }
+
+    game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
+    task.wait(getgenv().DelayRollFruit)
+  end
+end
+    
 
 warn("All functions have been loaded")
 warn("Thank you for using Rael's modules (Laelmano24)")
