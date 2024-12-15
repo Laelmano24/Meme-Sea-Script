@@ -4,6 +4,7 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game.Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local PlayerGui = LocalPlayer.PlayerGui
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local QuestScreen = PlayerGui.QuestGui.Holder.QuestSlot1
 local QuestLocaion = workspace.Location.QuestLocaion
 local QuestsNpc = workspace.NPCs.Quests_Npc
@@ -536,6 +537,53 @@ function RaelHubMemeSea.ShowClickCat()
     end
   end
 end
+
+function RaelHubMemeSea.AutoPutStats(value, melee, Health, Weapon, Power)
+  
+  getgenv().AutoPutStats = value
+  
+  task.spawn(function()
+    while getgenv().AutoPutStats do
+      local TabArgs = {
+        MeleeLevel = {
+          [1] = {
+            ["Target"] = "MeleeLevel",
+            ["Action"] = "UpgradeStats",
+            ["Amount"] = melee
+          }
+        },
+        DefenseLevel = {
+          [1] = {
+            ["Target"] = "DefenseLevel",
+            ["Action"] = "UpgradeStats",
+            ["Amount"] = Health
+          }
+        },
+        SwordLevel = {
+          [1] = {
+            ["Target"] = "SwordLevel",
+            ["Action"] = "UpgradeStats",
+            ["Amount"] = Weapon
+          }
+        },
+        MemePowerLevel = {
+          [1] = {
+            ["Target"] = "MemePowerLevel",
+            ["Action"] = "UpgradeStats",
+            ["Amount"] = Power
+          }
+        }
+      }
+      for _, Args in ipairs(TabArgs) do
+        ReplicatedStorage.OtherEvent.MainEvents.StatsFunction:InvokeServer(unpack(Args))
+        task.wait(0.3)
+      end
+    end
+  end)
+end
+
+
+
 
 warn("All functions have been loaded")
 warn("Thank you for using Rael's modules (Laelmano24)")
