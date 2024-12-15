@@ -22,6 +22,7 @@ getgenv().AutoMemeBeast = false
 getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
 getgenv().ActiveCheckDistance = true
+getgenv().GetQuestValue = true
 -- Auto Farm
 
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
@@ -227,21 +228,29 @@ RaelHubMemeSea.GetLevelAndQuest(false)
 -- Auto farm with the selected monster
 
 function GetQuestSelected(npcquest)
-  while getgenv().RaelHubAutoFarmSelected and not CheckQuest() do
-    local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-    if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
-      Character:MoveTo(QuestLocaion[npcquest].Position)
-      task.wait()
-      if QuestsNpc:FindFirstChild(npcquest) then
-        fireproximityprompt(QuestsNpc[npcquest].Block.QuestPrompt)
+  while getgenv().RaelHubAutoFarmSelected do
+    if getgenv().GetQuestValue then
+      if CheckQuest() then
+        local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+        if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
+          Character:MoveTo(QuestLocaion[npcquest].Position)
+          task.wait()
+          if QuestsNpc:FindFirstChild(npcquest) then
+            fireproximityprompt(QuestsNpc[npcquest].Block.QuestPrompt)
+          end
+        end
+      else
+        break
       end
+    else
+      break
     end
     task.wait()
   end
 end
 
 function TeleportToMonsterSelected(monster)
-  while monster.Parent and getgenv().RaelHubAutoFarmSelected and CheckQuest() do
+  while monster.Parent and getgenv().RaelHubAutoFarmSelected do
     if monster then
       local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
       if HumanoidRootPart then
