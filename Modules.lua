@@ -625,7 +625,7 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
           if callback then
             callback()
           end
-          TeleportToMemeSea(MemeBeast)
+          TeleportToMemeSea(Monster)
           if callback2 then
             callback2()
           end
