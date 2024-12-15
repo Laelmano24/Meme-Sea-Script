@@ -580,8 +580,8 @@ end
 
 -- Auto MemeSea
 
-function TeleportToMonsterSelected(monster, variable)
-  while monster.Parent and variable do
+function TeleportToMonsterSelected(monster)
+  while monster.Parent and getgenv().AutoMemeBeast do
     if monster then
       local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
       if HumanoidRootPart then
@@ -613,7 +613,7 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback)
           end
         end)
         callback()
-        TeleportToMonsterSelected(MemeBeast, getgenv().AutoMemeBeast)
+        TeleportToMonsterSelected(MemeBeast)
         
       end
       task.wait()
