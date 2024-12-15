@@ -580,7 +580,7 @@ end
 
 -- Auto MemeSea
 
-function TeleportToMonsterSelected(monster)
+function TeleportToMemeSea(monster)
   while monster.Parent and getgenv().AutoMemeBeast do
     if monster then
       local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
