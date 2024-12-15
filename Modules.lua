@@ -18,6 +18,7 @@ getgenv().RaelHubGetLevel = true
 getgenv().RaelHubAutoFarm = false
 getgenv().RaelHubAutoFarmSelected = false
 getgenv().RaelHubAutoFarmBossSelected = false
+getgenv().AutoMemeBeast = false
 getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
 getgenv().ActiveCheckDistance = true
@@ -538,6 +539,8 @@ function RaelHubMemeSea.ShowClickCat()
   end
 end
 
+-- Auto stats
+
 function RaelHubMemeSea.AutoPutStats(value, melee, health, weapon, power)
   getgenv().AutoPutStats = value
 
@@ -571,6 +574,49 @@ function RaelHubMemeSea.AutoPutStats(value, melee, health, weapon, power)
         task.wait(0.3)
       end
       task.wait(1)
+    end
+  end)
+end
+
+-- Auto MemeSea
+
+function TeleportToMonsterSelected(monster, variable)
+  while monster.Parent and variable do
+    if monster then
+      local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
+      if HumanoidRootPart then
+        local position = HumanoidRootPart.Position
+        local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
+        local rotation = Vector3.new(-90, 0, 180)
+
+        if Character and Character:FindFirstChild("HumanoidRootPart") then
+          Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
+        end
+      end
+      task.wait()
+    end
+  end
+end
+
+function RaelHubMemeSea.AutoMemeBeast(value, callback)
+  getgenv().AutoMemeBeast = value
+  task.spawn(function()
+    while getgenv().AutoMemeBeast do
+      
+      local MemeBeast = workspace.Monster:FindFirstChild("Meme Beast")
+      if MemeBeast then
+        
+        task.spawn(function()
+          while getgenv().AutoMemeBeast do
+            Function_EquipStyle()
+            task.wait()
+          end
+        end)
+        callback()
+        TeleportToMonsterSelected(MemeBeast, getgenv().AutoMemeBeast)
+        
+      end
+      task.wait()
     end
   end)
 end
