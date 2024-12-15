@@ -613,9 +613,13 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
               task.wait()
             end
           end)
-          callback()
+          if callback then
+            callback()
+          end
           TeleportToMemeSea(MemeBeast)
-          callback2()
+          if callback2 then
+            callback2()
+          end
         end
       end
       task.wait()
