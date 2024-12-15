@@ -603,18 +603,19 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback)
   task.spawn(function()
     while getgenv().AutoMemeBeast do
       
-      local MemeBeast = workspace.Monster:FindFirstChild("Meme Beast")
-      if MemeBeast then
+      for _, Monster in ipairs(Monsters:GetChildren()) do
         
-        task.spawn(function()
-          while getgenv().AutoMemeBeast do
-            Function_EquipStyle()
-            task.wait()
-          end
-        end)
-        callback()
-        TeleportToMonsterSelected(MemeBeast)
+        if Monster == "Meme Beast" then
         
+          task.spawn(function()
+            while getgenv().AutoMemeBeast do
+              Function_EquipStyle()
+              task.wait()
+            end
+          end)
+          callback()
+          TeleportToMemeSea(MemeBeast)
+        end
       end
       task.wait()
     end
