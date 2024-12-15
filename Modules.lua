@@ -538,47 +538,39 @@ function RaelHubMemeSea.ShowClickCat()
   end
 end
 
-function RaelHubMemeSea.AutoPutStats(value, melee, Health, Weapon, Power)
-  
+function RaelHubMemeSea.AutoPutStats(value, melee, health, weapon, power)
   getgenv().AutoPutStats = value
-  
+
   task.spawn(function()
     while getgenv().AutoPutStats do
       local TabArgs = {
-        MeleeLevel = {
-          [1] = {
-            ["Target"] = "MeleeLevel",
-            ["Action"] = "UpgradeStats",
-            ["Amount"] = melee
-          }
+        {
+          ["Target"] = "MeleeLevel",
+          ["Action"] = "UpgradeStats",
+          ["Amount"] = melee
         },
-        DefenseLevel = {
-          [1] = {
-            ["Target"] = "DefenseLevel",
-            ["Action"] = "UpgradeStats",
-            ["Amount"] = Health
-          }
+        {
+          ["Target"] = "DefenseLevel",
+          ["Action"] = "UpgradeStats",
+          ["Amount"] = health
         },
-        SwordLevel = {
-          [1] = {
-            ["Target"] = "SwordLevel",
-            ["Action"] = "UpgradeStats",
-            ["Amount"] = Weapon
-          }
+        {
+          ["Target"] = "SwordLevel",
+          ["Action"] = "UpgradeStats",
+          ["Amount"] = weapon
         },
-        MemePowerLevel = {
-          [1] = {
-            ["Target"] = "MemePowerLevel",
-            ["Action"] = "UpgradeStats",
-            ["Amount"] = Power
-          }
+        {
+          ["Target"] = "MemePowerLevel",
+          ["Action"] = "UpgradeStats",
+          ["Amount"] = power
         }
       }
+
       for _, Args in ipairs(TabArgs) do
-        ReplicatedStorage.OtherEvent.MainEvents.StatsFunction:InvokeServer(unpack(Args))
+        ReplicatedStorage.OtherEvent.MainEvents.StatsFunction:InvokeServer(Args)
         task.wait(0.3)
       end
-      task.wait()
+      task.wait(1)
     end
   end)
 end
