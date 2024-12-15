@@ -614,7 +614,7 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
       
       for _, Monster in ipairs(Monsters:GetChildren()) do
         
-        if Monster == "Meme Beast" then
+        if Monster.Name == "Meme Beast" then
         
           task.spawn(function()
             while getgenv().AutoMemeBeast do
