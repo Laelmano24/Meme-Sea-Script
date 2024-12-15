@@ -578,12 +578,10 @@ function RaelHubMemeSea.AutoPutStats(value, melee, Health, Weapon, Power)
         ReplicatedStorage.OtherEvent.MainEvents.StatsFunction:InvokeServer(unpack(Args))
         task.wait(0.3)
       end
+      task.wait()
     end
   end)
 end
-
-
-
 
 warn("All functions have been loaded")
 warn("Thank you for using Rael's modules (Laelmano24)")
