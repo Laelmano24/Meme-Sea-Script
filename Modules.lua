@@ -598,7 +598,7 @@ function TeleportToMemeSea(monster)
   end
 end
 
-function RaelHubMemeSea.AutoMemeBeast(value, callback)
+function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
   getgenv().AutoMemeBeast = value
   task.spawn(function()
     while getgenv().AutoMemeBeast do
@@ -615,6 +615,7 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback)
           end)
           callback()
           TeleportToMemeSea(MemeBeast)
+          callback2()
         end
       end
       task.wait()
