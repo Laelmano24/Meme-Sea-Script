@@ -4,6 +4,7 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game.Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local PlayerGui = LocalPlayer.PlayerGui
+local CharacterPlayer = workpace.Character
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local QuestScreen = PlayerGui.QuestGui.Holder.QuestSlot1
 local ScreenGuiBossTime = workspace.Leaderboard.Time.Model.ScoreBlock.SurfaceGui
@@ -27,6 +28,8 @@ getgenv().GetQuestValue = true
 getgenv().AutoRollFruitMoney = false
 getgenv().AutoRollFruitGem = false
 getgenv().DelayRollFruit = 1
+getgenv().AutoAimBot = false
+getgenv().PlayerAimBot = CharacterPlayer:GetChildren()[1].HumanoidRootPart.Position
 -- Auto Farm
 
 local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/Equip%20Style.lua"))()
@@ -37,6 +40,25 @@ local GetListQuest = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
+end)
+
+_G.MonitorSkill = nil
+
+_G.MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
+  local args = {...}
+  local method = getnamecallmethod()
+    
+  if method == "FireServer" and tostring(self) == "Server_Skills" and getgenv().AutoAimBot then
+    if args[5] and type(args[5]) == "table" then
+      if args[5]["Hit_Position"] then
+        args[5]["Hit_Position"] = getgenv().PlayerAimBot
+      elseif args[5]["Mouse_Position"] then
+        args[5]["Mouse_Position"] = getgenv().PlayerAimBot
+      end
+    end
+  end
+
+  return _G.MonitorSkill(self, unpack(args))
 end)
 
 function RaelHubMemeSea.GetLevelAndQuest(value)
@@ -685,7 +707,43 @@ function RaelHubMemeSea.AutoRollFruitGem(value)
     task.wait(getgenv().DelayRollFruit)
   end
 end
-    
+
+-- Auto Aimbot player 
+
+function RaelHubMemeSea.AutoAimbotPlayer(value)
+  getgenv().AutoAimBot = value
+  while getgenv().AutoAimBot do
+    task.wait()
+    local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+    if humanoidrootpart then
+      local closestPlayer = nil
+      local closestDistance = math.huge
+
+      for _, player in ipairs(CharacterPlayer:GetChildren()) do
+        if player ~= LocalPlayer then
+          local targetRoot = player.Character:FindFirstChild("HumanoidRootPart")
+          if targetRoot then
+            local distance = (humanoidrootpart.Position - targetRoot.Position).Magnitude
+            if distance < closestDistance then
+              closestDistance = distance
+              closestPlayer = player
+            end
+          end
+        end
+      end
+
+      if closestPlayer then
+        
+        local humanoidrootpart = closestPlayer:FindFirstChild("HumanoidRootPart")
+        if humanoidrootpart then
+          
+          getgenv().PlayerAimBot = humanoidrootpart.Position
+          
+        end
+      end
+    end
+  end
+end
 
 warn("All functions have been loaded")
 warn("Thank you for using Rael's modules (Laelmano24)")
