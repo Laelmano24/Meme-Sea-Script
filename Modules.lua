@@ -232,22 +232,14 @@ RaelHubMemeSea.GetLevelAndQuest(false)
 -- Auto farm with the selected monster
 
 function GetQuestSelected(npcquest)
-  while getgenv().RaelHubAutoFarmSelected do
-    if getgenv().GetQuestValue then
-      if CheckQuest() then
-        local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-        if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
-          Character:MoveTo(QuestLocaion[npcquest].Position)
-          task.wait()
-          if QuestsNpc:FindFirstChild(npcquest) then
-            fireproximityprompt(QuestsNpc[npcquest].Block.QuestPrompt)
-          end
-        end
-      else
-        break
+  while getgenv().RaelHubAutoFarmSelected and getgenv().GetQuestValue and not CheckQuest() do
+    local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+    if HumanoidRootPart and QuestsNpc:FindFirstChild(npcquest) then
+      Character:MoveTo(QuestLocaion[npcquest].Position)
+      task.wait()
+      if QuestsNpc:FindFirstChild(npcquest) then
+        fireproximityprompt(QuestsNpc[npcquest].Block.QuestPrompt)
       end
-    else
-      break
     end
     task.wait()
   end
@@ -307,7 +299,7 @@ function RaelHubMemeSea.AutoFarmMonsterSelected(monster, value)
     end
   end)
 end
--- Auto farm boss selected
+-- Auto farm boss summmon selected
 
 function GetQuestBossSelected(npcquest)
   while getgenv().RaelHubAutoFarmBossSelected and not CheckQuest() do
@@ -609,7 +601,7 @@ function RaelHubMemeSea.AutoPutStats(value, melee, health, weapon, power)
   end)
 end
 
--- Auto MemeSea
+-- Auto Meme beast
 
 function TeleportToMemeSea(monster)
   while monster.Parent and getgenv().AutoMemeBeast do
@@ -657,6 +649,8 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
     end
   end)
 end
+
+-- Auto roll fruit
 
 function RaelHubMemeSea.AutoRollFruitMoney(value)
   getgenv().AutoRollFruitMoney = value
