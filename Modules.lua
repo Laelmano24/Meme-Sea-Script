@@ -3,6 +3,7 @@ local VirtualUser = game:GetService("VirtualUser")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game.Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Camera = workspace.CurrentCamera
 local PlayerGui = LocalPlayer.PlayerGui
 local CharacterPlayer = workspace.Character
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -30,6 +31,10 @@ getgenv().AutoRollFruitGem = false
 getgenv().DelayRollFruit = 1
 getgenv().AutoAimBot = false
 getgenv().AutoAimbotPlayerSelected = false
+getgenv().RaelHubSpectatePlayer = false
+getgenv().AutoRollAura = false
+getgenv().AutoClickFkoppa = false
+
 getgenv().PlayerAimBot = CharacterPlayer:GetChildren()[1].HumanoidRootPart.Position
 -- Auto Farm
 
@@ -757,6 +762,82 @@ function RaelHubMemeSea.AutoAimbotPlayerSelected(value, player)
         getgenv().PlayerAimBot = humanoidrootpart.Position
       end
     end
+  end
+end
+
+-- Function spectar player
+
+function RaelHubMemeSea.StopSpectatePlayer()
+  Camera.CameraSubject = Character:FindFirstChild("Humanoid")
+end
+
+function RaelHubMemeSea.SpectatePlayer(value, targetPlayer)
+  
+  getgenv().RaelHubSpectatePlayer = value
+  
+  local Player = CharacterPlayer:FindFirstChild(targetPlayer)
+  
+  if Player then
+    local targetHumanoid = Player:FindFirstChild("Humanoid")
+
+    if targetHumanoid then
+      task.spawn(function()
+        while getgenv().RaelHubSpectatePlayer do
+          Camera.CameraSubject = targetHumanoid
+          task.wait()
+        end
+      end)
+    end
+  end
+end
+
+RaelHubMemeSea.StopSpectatePlayer()
+
+-- Auto roll aura
+
+function RaelHubMemeSea.AutoRollAura(value)
+  
+  getgenv().AutoRollAura = value
+  
+  task.spawn(function()
+    while getgenv().AutoRollAura do
+      local args = {
+        [1] = "Reroll_Color",
+        [2] = "Halfed Sorcerer"
+      }
+
+      game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
+      task.wait(1)
+    end
+  end)
+end
+
+-- function floppa
+
+function RaelHubMemeSea.AutoClickFloppa(value)
+  getgenv().AutoClickFkoppa = Value
+  task.spawn(function()
+    while getgenv().AutoClickFkoppa do
+    
+      local Island = workspace.Island
+      local FloppaIsland = Island:FindFirstChild("FloppaIsland")
+      if FloppaIsland then
+        local LavaFloppa = FloppaIsland:FindFirstChild("Lava Floppa")
+        if LavaFloppa then
+          
+          fireproximityprompt(LavaFloppa.ClickPart.ProximityPrompt)
+          task.wait(0.05)
+        end
+      end
+      task.wait()
+    end
+  end)
+end
+
+function RaelHubMemeSea.FloppaTeleport()
+  local Humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+  if Humanoidrootpart then
+    Humanoidrootpart.CFrame = CFrame.new(790.521728515625, -32.224796295166016, -442.47808837890625)
   end
 end
 
