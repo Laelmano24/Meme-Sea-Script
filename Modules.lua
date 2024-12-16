@@ -720,7 +720,7 @@ function RaelHubMemeSea.AutoAimbotPlayer(value)
       local closestDistance = math.huge
 
       for _, player in ipairs(CharacterPlayer:GetChildren()) do
-        if player ~= LocalPlayer then
+        if player.Name ~= LocalPlayer.Name then
           local targetRoot = player:FindFirstChild("HumanoidRootPart")
           if targetRoot then
             local distance = (humanoidrootpart.Position - targetRoot.Position).Magnitude
