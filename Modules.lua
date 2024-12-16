@@ -448,12 +448,15 @@ end
 
 function CheckBossLordSus()
   local BossLordSusText = ScreenGuiBossTime["Lord Sus"].Text
+  local BossModel = Monsters:FindFirstChild("Lord Sus")
   
   if BossLordSusText:find("✅") then
     getgenv().MonsterName = "Lord Sus"
     getgenv().NpcQuest = "Floppa Quest 32"
     GetQuestBossSelected(getgenv().NpcQuest)
-    TeleportToBossSelected(Boss)
+    if BossModel then
+      TeleportToBossSelected(BossModel)
+    end
   else
     local FunctionCheck = CheckItemSummon("Sussy Orb")
     if FunctionCheck then
@@ -461,19 +464,23 @@ function CheckBossLordSus()
       getgenv().MonsterName = "Lord Sus"
       getgenv().NpcQuest = "Floppa Quest 32"
       GetQuestBossSelected(getgenv().NpcQuest)
-      TeleportToBossSelected(Boss)
-      
+      if BossModel then
+        TeleportToBossSelected(BossModel)
+      end
     end
   end
 end
 
 function CheckBossPumpkin()
   local BossPumpkinText = ScreenGuiBossTime["Giant Pumpkin"].Text
+  local BossModel = Monsters:FindFirstChild("Giant Pumpkin")
   if BossPumpkinText:find("✅") then
     getgenv().MonsterName = "Giant Pumpkin"
     getgenv().NpcQuest = "Floppa Quest 23"
     GetQuestBossSelected(getgenv().NpcQuest)
-    TeleportToBossSelected(Boss)
+    if BossModel then
+      TeleportToBossSelected(BossModel)
+    end
   else
     local FunctionCheck = CheckItemSummon("Flame Orb")
     if FunctionCheck then
@@ -481,8 +488,9 @@ function CheckBossPumpkin()
       getgenv().MonsterName = "Giant Pumpkin"
       getgenv().NpcQuest = "Floppa Quest 23"
       GetQuestBossSelected(getgenv().NpcQuest)
-      TeleportToBossSelected(Boss)
-      
+      if BossModel then
+        TeleportToBossSelected(BossModel)
+      end
     end
   end
 end
@@ -490,11 +498,14 @@ end
 function CheckBossEvilNoob()
   
   local BossEvilNoobText = ScreenGuiBossTime["Evil Noob"].Text
+  local BossModel = Monsters:FindFirstChild("Evil Noob")
   if BossEvilNoobText:find("✅") then
     getgenv().MonsterName = "Evil Noob"
     getgenv().NpcQuest = "Floppa Quest 29"
     GetQuestBossSelected(getgenv().NpcQuest)
-    TeleportToBossSelected(Boss)
+    if BossModel then
+      TeleportToBossSelected(BossModel)
+    end
   else
     local FunctionCheck = CheckItemSummon("Noob Head")
     if FunctionCheck then
@@ -502,8 +513,9 @@ function CheckBossEvilNoob()
       getgenv().MonsterName = "Evil Noob"
       getgenv().NpcQuest = "Floppa Quest 29"
       GetQuestBossSelected(getgenv().NpcQuest)
-      TeleportToBossSelected(Boss)
-      
+      if BossModel then
+        TeleportToBossSelected(BossModel)
+      end
     end
   end
 end
