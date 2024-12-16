@@ -768,6 +768,7 @@ end
 -- Function spectar player
 
 function RaelHubMemeSea.StopSpectatePlayer()
+  getgenv().RaelHubSpectatePlayer = false
   Camera.CameraSubject = Character:FindFirstChild("Humanoid")
 end
 
