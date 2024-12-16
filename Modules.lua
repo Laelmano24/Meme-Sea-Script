@@ -816,7 +816,7 @@ end
 -- function floppa
 
 function RaelHubMemeSea.AutoClickFloppa(value)
-  getgenv().AutoClickFkoppa = Value
+  getgenv().AutoClickFkoppa = value
   task.spawn(function()
     while getgenv().AutoClickFkoppa do
       pcall(function()
