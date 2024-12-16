@@ -42,9 +42,9 @@ LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
 end)
 
-_G.MonitorSkill = nil
+getgenv().MonitorSkill = nil
 
-_G.MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
+getgenv().MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
   local args = {...}
   local method = getnamecallmethod()
     
@@ -58,7 +58,7 @@ _G.MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
     end
   end
 
-  return _G.MonitorSkill(self, unpack(args))
+  return getgenv().MonitorSkill(self, unpack(args))
 end)
 
 function RaelHubMemeSea.GetLevelAndQuest(value)
@@ -734,11 +734,12 @@ function RaelHubMemeSea.AutoAimbotPlayer(value)
 
       if closestPlayer then
         
-        local humanoidrootpart = closestPlayer:FindFirstChild("HumanoidRootPart")
         if humanoidrootpart then
-          
-          getgenv().PlayerAimBot = humanoidrootpart.Position
-          
+          print(closestPlayer.Name)
+          local Root = closestPlayer:FindFirstChild("HumanoidRootPart")
+          if Root then
+            getgenv().PlayerAimBot = Root.Position
+          end
         end
       end
     end
