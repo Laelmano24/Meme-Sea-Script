@@ -818,18 +818,10 @@ function RaelHubMemeSea.AutoClickFloppa(value)
   getgenv().AutoClickFkoppa = Value
   task.spawn(function()
     while getgenv().AutoClickFkoppa do
-    
-      local Island = workspace.Island
-      local FloppaIsland = Island:FindFirstChild("FloppaIsland")
-      if FloppaIsland then
-        local LavaFloppa = FloppaIsland:FindFirstChild("Lava Floppa")
-        if LavaFloppa then
-          
-          fireproximityprompt(LavaFloppa.ClickPart.ProximityPrompt)
-          task.wait(0.05)
-        end
-      end
-      task.wait()
+      pcall(function()
+        fireproximityprompt(workspace.Island.FloppaIsland["Lava Floppa"].ClickPart.ProximityPrompt)
+      end)
+      task.wait(0.05)
     end
   end)
 end
