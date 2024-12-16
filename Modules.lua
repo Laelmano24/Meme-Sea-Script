@@ -6,6 +6,7 @@ local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local PlayerGui = LocalPlayer.PlayerGui
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local QuestScreen = PlayerGui.QuestGui.Holder.QuestSlot1
+local ScreenGuiBossTime = workspace.Leaderboard.Time.Model.ScoreBlock.SurfaceGui
 local QuestLocaion = workspace.Location.QuestLocaion
 local QuestsNpc = workspace.NPCs.Quests_Npc
 local Monsters = workspace.Monster
@@ -355,9 +356,10 @@ function CheckItemSummon(item)
       for _, Monster in ipairs(Monsters:GetChildren()) do
         if Monster.Name == "Sus Duck" then
           TeleportToBossSelected(Monster)
+          local BossLordSusText = ScreenGuiBossTime["Lord Sus"].Text
           if ItemSummon.Value > 0 then
             break
-          elseif Monsters:FindFirstChild("Lord Sus") then
+          elseif BossLordSusText:find("✅") then
             break
           end
         end
@@ -372,9 +374,11 @@ function CheckItemSummon(item)
       for _, Monster in ipairs(Monsters:GetChildren()) do
         if Monster.Name == "Scary Skull" then
           TeleportToBossSelected(Monster)
+          local BossGiantPumpkinText = ScreenGuiBossTime["Giant Pumpkin"].Text
+
           if ItemSummon.Value > 0 then
             break
-          elseif Monsters:FindFirstChild("Giant Pumpkin") then
+          elseif BossGiantPumpkinText:find("✅") then
             break
           end
         end
@@ -390,9 +394,10 @@ function CheckItemSummon(item)
       for _, Monster in ipairs(Monsters:GetChildren()) do
         if Monster.Name == "Moai" then
           TeleportToBossSelected(Monster)
+          local BossEvilNoobText = ScreenGuiBossTime["Evil Noob"].Text
           if ItemSummon.Value > 0 then
             break
-          elseif Monsters:FindFirstChild("Evil Noob") then
+          elseif BossEvilNoobText:find("✅") then
             break
           end
         end
@@ -442,8 +447,9 @@ function CheckItemSummon(item)
 end
 
 function CheckBossLordSus()
-  local Boss = Monsters:FindFirstChild("Lord Sus")
-  if Boss then
+  local BossLordSusText = ScreenGuiBossTime["Lord Sus"].Text
+  
+  if BossLordSusText:find("✅") then
     getgenv().MonsterName = "Lord Sus"
     getgenv().NpcQuest = "Floppa Quest 32"
     GetQuestBossSelected(getgenv().NpcQuest)
@@ -462,8 +468,8 @@ function CheckBossLordSus()
 end
 
 function CheckBossPumpkin()
-  local Boss = Monsters:FindFirstChild("Giant Pumpkin")
-  if Boss then
+  local BossPumpkinText = ScreenGuiBossTime["Giant Pumpkin"].Text
+  if BossPumpkinText:find("✅") then
     getgenv().MonsterName = "Giant Pumpkin"
     getgenv().NpcQuest = "Floppa Quest 23"
     GetQuestBossSelected(getgenv().NpcQuest)
@@ -482,8 +488,9 @@ function CheckBossPumpkin()
 end
 
 function CheckBossEvilNoob()
-  local Boss = Monsters:FindFirstChild("Evil Noob")
-  if Boss then
+  
+  local BossEvilNoobText = ScreenGuiBossTime["Evil Noob"].Text
+  if BossEvilNoobText:find("✅") then
     getgenv().MonsterName = "Evil Noob"
     getgenv().NpcQuest = "Floppa Quest 29"
     GetQuestBossSelected(getgenv().NpcQuest)
