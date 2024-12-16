@@ -29,6 +29,7 @@ getgenv().AutoRollFruitMoney = false
 getgenv().AutoRollFruitGem = false
 getgenv().DelayRollFruit = 1
 getgenv().AutoAimBot = false
+getgenv().AutoAimbotPlayerSelected = false
 getgenv().PlayerAimBot = CharacterPlayer:GetChildren()[1].HumanoidRootPart.Position
 -- Auto Farm
 
@@ -48,7 +49,7 @@ getgenv().MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
   local args = {...}
   local method = getnamecallmethod()
     
-  if method == "FireServer" and tostring(self) == "Server_Skills" and getgenv().AutoAimBot then
+  if method == "FireServer" and tostring(self) == "Server_Skills" and (getgenv().AutoAimBot or AutoAimbotPlayerSelected) then
     if args[5] and type(args[5]) == "table" then
       if args[5]["Hit_Position"] then
         args[5]["Hit_Position"] = getgenv().PlayerAimBot
@@ -735,12 +736,25 @@ function RaelHubMemeSea.AutoAimbotPlayer(value)
       if closestPlayer then
         
         if humanoidrootpart then
-          print(closestPlayer.Name)
           local Root = closestPlayer:FindFirstChild("HumanoidRootPart")
           if Root then
             getgenv().PlayerAimBot = Root.Position
           end
         end
+      end
+    end
+  end
+end
+
+function RaelHubMemeSea.AutoAimbotPlayerSelected(value, player)
+  getgenv().AutoAimbotPlayerSelected = value
+  while getgenv().AutoAimbotPlayerSelected do
+    task.wait()
+    local newplayer = CharacterPlayer:FindFirstChild(player)
+    if newplayer then
+      local humanoidrootpart = newplayer:FindFirstChild("HumanoidRootPart")
+      if humanoidrootpart then
+        getgenv().PlayerAimBot = humanoidrootpart.Position
       end
     end
   end
