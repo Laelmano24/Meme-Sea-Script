@@ -716,11 +716,11 @@ function RaelHubMemeSea.RaelHubAutoRaid(value)
       local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if CheckRaid() then
         if humanoidrootpart then
-          humanoidrootpart.CFrame = CFrame.new(2750.02001953125, -57.325801849365234, -4525.00244140625)
+          humanoidrootpart.CFrame = CFrame.new(-19418.61328125, 55.77359390258789, -22497.69921875)
         end
       else
         if humanoidrootpart then
-          humanoidrootpart.CFrame = CFrame.new(-19418.61328125, 55.77359390258789, -22497.69921875)
+          humanoidrootpart.CFrame = CFrame.new(2750.02001953125, -57.325801849365234, -4525.00244140625)
         end
       end
       for _, Monster in ipairs(Monsters:GetChildren()) do
