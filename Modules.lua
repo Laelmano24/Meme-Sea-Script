@@ -171,6 +171,7 @@ function TeleportToMonster(monster)
       end
       task.wait()
     end
+    task.wait()
   end
 end
 
@@ -289,6 +290,7 @@ function TeleportToMonsterSelected(monster)
       end
       task.wait()
     end
+    task.wait()
   end
 end
 
@@ -360,6 +362,7 @@ function TeleportToBossSelected(monster)
       end
       task.wait()
     end
+    task.wait()
   end
   end)
 end
@@ -647,6 +650,7 @@ function TeleportToMemeSea(monster)
       end
       task.wait()
     end
+    task.wait()
   end
 end
 
@@ -735,6 +739,7 @@ function TeleportToMonsterRaid(monster)
       end
       task.wait()
     end
+    task.wait()
   end
 end
 
@@ -838,6 +843,7 @@ function RaelHubMemeSea.AutoEquipFruitStone(value)
           game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
         end
       end
+      task.wait()
     end
   end)
 end
