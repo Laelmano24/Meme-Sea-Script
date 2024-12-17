@@ -681,6 +681,27 @@ end
 
 -- Auto raid
 
+function FindIslandRaid()
+  local Raids = workspace.Raids
+  for _, Raid in ipairs(Raids:GetChildren()) do
+    local Joiners = Raid:FindFirstChild("Joiners")
+    if Joiners then
+      local YourPlayer = Joiners:FindFirstChild(LocalPlayer.Name)
+      if YourPlayer then
+        local Statue = Raid:FindFirstChild("Statue")
+        if Statue then
+          local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+          local BasePart = Statue:FindFirstChild("Floppa")
+          if humanoidrootpart and BasePart then
+            humanoidrootpart.Cframe = CFrame.new(BasePart.Position + Vector3.new(0, 50, 0))
+          end
+        end
+      end
+    end
+  end
+end
+  
+
 function CheckRaid()
   local RaidGui = PlayerGui:FindFirstChild("RaidGui")
   if RaidGui then
