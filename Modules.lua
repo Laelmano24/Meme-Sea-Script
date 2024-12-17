@@ -685,7 +685,8 @@ function CheckRaid()
   local RaidGui = PlayerGui:FindFirstChild("RaidGui")
   if RaidGui then
     local RaidFrame = RaidGui:FindFirstChild("RaidFrame")
-    if RaidFrame and RaidFrame.Visible then 
+    if RaidFrame and RaidFrame.Visible then
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-19420.80859375, 55.62458419799805, -22497.720703125)
       return true
     else
       
@@ -719,6 +720,12 @@ function RaelHubMemeSea.RaelHubAutoRaid(value)
   task.spawn(function()
     while getgenv().RaelHubAutoRaid do
       if CheckRaid() then
+        task.spawn(function()
+          while getgenv().RaelHubAutoRaid do
+            Function_EquipStyle()
+            task.wait()
+          end
+        end)
         for _, Monster in ipairs(Monsters:GetChildren()) do
           if Monster and Monster:FindFirstChild("Raid_Mark") then
             TeleportToMonsterRaid(Monster)
