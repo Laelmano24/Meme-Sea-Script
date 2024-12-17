@@ -693,7 +693,7 @@ function FindIslandRaid()
           local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
           local BasePart = Statue:FindFirstChild("Floppa")
           if humanoidrootpart and BasePart then
-            humanoidrootpart.Cframe = CFrame.new(BasePart.Position + Vector3.new(0, 50, 0))
+            humanoidrootpart.CFrame = CFrame.new(BasePart.Position + Vector3.new(0, 50, 0))
           end
         end
       end
