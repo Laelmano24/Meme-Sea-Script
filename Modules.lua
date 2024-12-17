@@ -21,6 +21,7 @@ getgenv().RaelHubGetLevel = true
 getgenv().RaelHubAutoFarm = false
 getgenv().RaelHubAutoFarmSelected = false
 getgenv().RaelHubAutoFarmBossSelected = false
+getgenv().RaelHubAutoRaid = false
 getgenv().AutoMemeBeast = false
 getgenv().RaelHubAutoClicker = false
 getgenv().RaelHubAutoClickCat = false
@@ -678,6 +679,52 @@ function RaelHubMemeSea.AutoMemeBeast(value, callback, callback2)
   end)
 end
 
+-- Auto raid
+
+function CheckRaid()
+  local RaidGui = PlayerGui:FindFirstChild("RaidGui")
+  if RaidGui then
+    local RaidFrame = RaidGui:FindFirstChild("RaidFrame")
+    if RaidFrame then
+      return RaidFrame.Visible
+    end
+  end
+end
+
+function TeleportToMonsterRaid(monster)
+  while monster.Parent and getgenv().RaelHubAutoRaid and CheckRaid() and monster:FindFirstChild("Raid_Mark") do
+    if monster then
+      local HumanoidRootPart = monster:FindFirstChild("HumanoidRootPart")
+      if HumanoidRootPart then
+        local position = HumanoidRootPart.Position
+        local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
+        local rotation = Vector3.new(-90, 0, 180)
+
+        if Character and Character:FindFirstChild("HumanoidRootPart") then
+          Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
+        end
+      end
+      task.wait()
+    end
+  end
+end
+
+function RaelHubMemeSea.RaelHubAutoRaid(value)
+  getgenv().RaelHubAutoRaid = value
+  task.spawn(function()
+    while getgenv().RaelHubAutoRaid do
+      if CheckRaid() then
+        Character.CFrame = CFrame.new(2750.02001953125, -57.325801849365234, -4525.00244140625)
+      else
+        Character.CFrame = CFrame.new(-19418.61328125, 55.77359390258789, -22497.69921875)
+      end
+      for _, Monster in ipairs(Monsters:GetChildren()) do
+        TeleportToMonsterRaid(Monster)
+      end
+      task.wait()
+    end
+  end)
+end
 -- Auto roll fruit
 
 function RaelHubMemeSea.AutoRollFruitMoney(value)
