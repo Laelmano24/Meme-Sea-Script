@@ -49,24 +49,26 @@ LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
 end)
 
-getgenv().MonitorSkill = nil
 
-getgenv().MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
-  local args = {...}
-  local method = getnamecallmethod()
+if getgenv().MonitorSkill == nil then
+
+  getgenv().MonitorSkill = hookmetamethod(game, "__namecall", function(self, ...)
+    local args = {...}
+    local method = getnamecallmethod()
     
-  if method == "FireServer" and tostring(self) == "Server_Skills" and (getgenv().AutoAimBot or AutoAimbotPlayerSelected) then
-    if args[5] and type(args[5]) == "table" then
-      if args[5]["Hit_Position"] then
-        args[5]["Hit_Position"] = getgenv().PlayerAimBot
-      elseif args[5]["Mouse_Position"] then
-        args[5]["Mouse_Position"] = getgenv().PlayerAimBot
+    if method == "FireServer" and tostring(self) == "Server_Skills" and (getgenv().AutoAimBot or AutoAimbotPlayerSelected) then
+      if args[5] and type(args[5]) == "table" then
+        if args[5]["Hit_Position"] then
+          args[5]["Hit_Position"] = getgenv().PlayerAimBot
+        elseif args[5]["Mouse_Position"] then
+          args[5]["Mouse_Position"] = getgenv().PlayerAimBot
+        end
       end
     end
-  end
 
-  return getgenv().MonitorSkill(self, unpack(args))
-end)
+    return getgenv().MonitorSkill(self, unpack(args))
+  end)
+end
 
 function RaelHubMemeSea.GetLevelAndQuest(value)
   
