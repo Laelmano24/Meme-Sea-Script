@@ -713,10 +713,15 @@ function RaelHubMemeSea.RaelHubAutoRaid(value)
   getgenv().RaelHubAutoRaid = value
   task.spawn(function()
     while getgenv().RaelHubAutoRaid do
+      local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
       if CheckRaid() then
-        Character.CFrame = CFrame.new(2750.02001953125, -57.325801849365234, -4525.00244140625)
+        if humanoidrootpart then
+          humanoidrootpart.CFrame = CFrame.new(2750.02001953125, -57.325801849365234, -4525.00244140625)
+        end
       else
-        Character.CFrame = CFrame.new(-19418.61328125, 55.77359390258789, -22497.69921875)
+        if humanoidrootpart then
+          humanoidrootpart.CFrame = CFrame.new(-19418.61328125, 55.77359390258789, -22497.69921875)
+        end
       end
       for _, Monster in ipairs(Monsters:GetChildren()) do
         if Monster and Monster:FindFirstChild("Raid_Mark") then
