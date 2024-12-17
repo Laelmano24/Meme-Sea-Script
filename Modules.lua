@@ -710,8 +710,10 @@ function CheckRaid()
       FindIslandRaid()
       return true
     else
-      
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2749.34912109375, -57.32579803466797, -4524.14306640625)
+      local humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
+      if humanoidrootpart then
+        humanoidrootpart.CFrame = CFrame.new(2749.34912109375, -57.32579803466797, -4524.14306640625)
+      end
       return false
       
     end
