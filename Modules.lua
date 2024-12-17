@@ -683,6 +683,7 @@ end
 
 function RaelHubMemeSea.AutoRollFruitMoney(value)
   getgenv().AutoRollFruitMoney = value
+  task.spawn(function()
   while getgenv().AutoRollFruitMoney do
     local args = {
       [1] = "Random_Power",
@@ -696,10 +697,12 @@ function RaelHubMemeSea.AutoRollFruitMoney(value)
     game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
     task.wait(getgenv().DelayRollFruit)
   end
+  end)
 end
 
 function RaelHubMemeSea.AutoRollFruitGem(value)
   getgenv().AutoRollFruitGem = value
+  task.spawn(function()
   while getgenv().AutoRollFruitGem do
     local args = {
       [1] = "Random_Power",
@@ -713,6 +716,7 @@ function RaelHubMemeSea.AutoRollFruitGem(value)
     game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
     task.wait(getgenv().DelayRollFruit)
   end
+  end)
 end
 
 -- Auto equip in store
