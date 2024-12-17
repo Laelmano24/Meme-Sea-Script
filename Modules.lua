@@ -28,6 +28,7 @@ getgenv().ActiveCheckDistance = true
 getgenv().GetQuestValue = true
 getgenv().AutoRollFruitMoney = false
 getgenv().AutoRollFruitGem = false
+getgenv().AutoEquipFruitStone = false
 getgenv().DelayRollFruit = 1
 getgenv().AutoAimBot = false
 getgenv().AutoAimbotPlayerSelected = false
@@ -42,7 +43,7 @@ local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local GetListMonsters = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
 local GetListQuest = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/GetListQuest.lua"))()
-
+local GeListFruitPower = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/GeListFruitPower.lua"))()
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
@@ -712,6 +713,39 @@ function RaelHubMemeSea.AutoRollFruitGem(value)
     game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
     task.wait(getgenv().DelayRollFruit)
   end
+end
+
+-- Auto equip in store
+
+function RaelHubMemeSea.AutoEquipFruitStone(value)
+  getgenv().AutoEquipFruitStone = value
+  task.spawn(function()
+    while getgenv().AutoEquipFruitStone do
+
+      for _, fruit in ipairs(BackPack:GetChildren()) do
+        if table.find(GeListFruitPower, fruit.Name) and #fruit:GetChildren() > 0 then
+          fruit.Parent = Character
+        end
+      end
+
+      task.wait(0.2)
+
+      for _, fruit in ipairs(Character:GetChildren()) do
+
+        if table.find(GeListFruitPower, fruit.Name) and #fruit:GetChildren() > 0 then
+          local args = {
+            [1] = "Eatable_Power",
+            [2] = {
+              ["Action"] = "Store",
+              ["Tool"] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(fruit.Name)
+            }
+          }
+
+          game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
+        end
+      end
+    end
+  end)
 end
 
 -- Auto Aimbot player 
