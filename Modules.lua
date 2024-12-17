@@ -29,7 +29,6 @@ getgenv().GetQuestValue = true
 getgenv().AutoRollFruitMoney = false
 getgenv().AutoRollFruitGem = false
 getgenv().AutoEquipFruitStone = false
-getgenv().DelayRollFruit = 1
 getgenv().AutoAimBot = false
 getgenv().AutoAimbotPlayerSelected = false
 getgenv().RaelHubSpectatePlayer = false
@@ -684,38 +683,46 @@ end
 function RaelHubMemeSea.AutoRollFruitMoney(value)
   getgenv().AutoRollFruitMoney = value
   task.spawn(function()
-  while getgenv().AutoRollFruitMoney do
-    local args = {
-      [1] = "Random_Power",
-      [2] = {
-        ["Type"] = "Once",
-        ["NPCName"] = "Floppa Gacha",
-        ["GachaType"] = "Money"
+    while getgenv().AutoRollFruitMoney do
+      local args = {
+        [1] = "Random_Power",
+        [2] = {
+          ["Type"] = "Once",
+          ["NPCName"] = "Floppa Gacha",
+          ["GachaType"] = "Money"
+        }
       }
-    }
-
-    game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
-    task.wait(getgenv().DelayRollFruit)
-  end
+      for i = 1, 5 do
+        if getgenv().AutoRollFruitMoney then
+          game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
+          task.wait(0.5)
+        end
+      end
+      task.wait(4)
+    end
   end)
 end
 
 function RaelHubMemeSea.AutoRollFruitGem(value)
   getgenv().AutoRollFruitGem = value
   task.spawn(function()
-  while getgenv().AutoRollFruitGem do
-    local args = {
-      [1] = "Random_Power",
-      [2] = {
-        ["Type"] = "Once",
-        ["NPCName"] = "Doge Gacha",
-        ["GachaType"] = "Gem"
+    while getgenv().AutoRollFruitGem do
+      local args = {
+        [1] = "Random_Power",
+        [2] = {
+          ["Type"] = "Once",
+          ["NPCName"] = "Doge Gacha",
+          ["GachaType"] = "Gem"
+        }
       }
-    }
-
-    game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
-    task.wait(getgenv().DelayRollFruit)
-  end
+      for i = 1, 5 do
+        if getgenv().AutoRollFruitGem then
+          game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Modules:FireServer(unpack(args))
+          task.wait(0.5)
+        end
+      end
+      task.wait(4)
+    end
   end)
 end
 
