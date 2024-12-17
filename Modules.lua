@@ -721,7 +721,9 @@ function RaelHubMemeSea.AutoEquipFruitStone(value)
   getgenv().AutoEquipFruitStone = value
   task.spawn(function()
     while getgenv().AutoEquipFruitStone do
-
+      
+      local BackPack = LocalPlayer:FindFirstChild("Backpack")
+      
       for _, fruit in ipairs(BackPack:GetChildren()) do
         if table.find(GeListFruitPower, fruit.Name) and #fruit:GetChildren() > 0 then
           fruit.Parent = Character
