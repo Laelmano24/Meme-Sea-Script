@@ -173,7 +173,6 @@ function TeleportToMonster(monster)
       end
       task.wait()
     end
-    task.wait()
   end
 end
 
@@ -292,7 +291,6 @@ function TeleportToMonsterSelected(monster)
       end
       task.wait()
     end
-    task.wait()
   end
 end
 
@@ -364,7 +362,6 @@ function TeleportToBossSelected(monster)
       end
       task.wait()
     end
-    task.wait()
   end
   end)
 end
@@ -652,7 +649,6 @@ function TeleportToMemeSea(monster)
       end
       task.wait()
     end
-    task.wait()
   end
 end
 
@@ -741,7 +737,6 @@ function TeleportToMonsterRaid(monster)
       end
       task.wait()
     end
-    task.wait()
   end
 end
 
