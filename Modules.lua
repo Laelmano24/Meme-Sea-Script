@@ -719,7 +719,9 @@ function RaelHubMemeSea.RaelHubAutoRaid(value)
         Character.CFrame = CFrame.new(-19418.61328125, 55.77359390258789, -22497.69921875)
       end
       for _, Monster in ipairs(Monsters:GetChildren()) do
-        TeleportToMonsterRaid(Monster)
+        if Monster and Monster:FindFirstChild("Raid_Mark") then
+          TeleportToMonsterRaid(Monster)
+        end
       end
       task.wait()
     end
