@@ -707,7 +707,7 @@ function CheckRaid()
   if RaidGui then
     local RaidFrame = RaidGui:FindFirstChild("RaidFrame")
     if RaidFrame and RaidFrame.Visible then
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-19420.80859375, 55.62458419799805, -22497.720703125)
+      FindIslandRaid()
       return true
     else
       
