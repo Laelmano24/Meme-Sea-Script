@@ -21,7 +21,8 @@ end
 
 function GetFightingStyle.melee()
   return {
-    "Combat"
+    "Combat",
+    "Baller"
   }
 end
 
