@@ -36,6 +36,7 @@ getgenv().RaelHubSpectatePlayer = false
 getgenv().AutoRollAura = false
 getgenv().AutoClickFkoppa = false
 getgenv().RaelHubTeleportPlayer = false
+getgenv().RaelHubAutoAura = false
 
 getgenv().PlayerAimBot = CharacterPlayer:GetChildren()[1].HumanoidRootPart.Position
 -- Auto Farm
@@ -987,8 +988,29 @@ function RaelHubMemeSea.TeleportToPlayer(value, player)
         task.wait()
       end
     end)
-    task.wait()
   end
+end
+
+-- Auto aura
+
+function RaelHubMemeSea.AutoEquipedAura(value)
+  getgenv().RaelHubAutoAura = value
+  task.spawn(function()
+    while getgenv().RaelHubAutoAura do
+      local AuraColor_Folder = Character:FindFirstChild("AuraColor_Folder")
+      if AuraColor_Folder then
+        if #AuraColor_Folder:GetChildren() == 0 then
+          local args = {
+            [1] = "Aura"
+          }
+
+          game:GetService("ReplicatedStorage").OtherEvent.MainEvents.Ability:InvokeServer(unpack(args))
+          task.wait(0.5)
+        end
+      end
+      task.wait()
+    end
+  end)
 end
 
 warn("All functions have been loaded")
