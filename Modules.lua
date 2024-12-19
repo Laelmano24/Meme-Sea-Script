@@ -35,6 +35,7 @@ getgenv().AutoAimbotPlayerSelected = false
 getgenv().RaelHubSpectatePlayer = false
 getgenv().AutoRollAura = false
 getgenv().AutoClickFkoppa = false
+getgenv().RaelHubTeleportPlayer = false
 
 getgenv().PlayerAimBot = CharacterPlayer:GetChildren()[1].HumanoidRootPart.Position
 -- Auto Farm
@@ -962,6 +963,28 @@ function RaelHubMemeSea.FloppaTeleport()
   local Humanoidrootpart = Character:FindFirstChild("HumanoidRootPart")
   if Humanoidrootpart then
     Humanoidrootpart.CFrame = CFrame.new(790.521728515625, -32.224796295166016, -442.47808837890625)
+  end
+end
+
+-- Teleport to player
+
+function RaelHubMemeSea.TeleportToPlayer(value, player)
+  getgenv().RaelHubTeleportPlayer = value
+  while getgenv().RaelHubTeleportPlayer do
+    local Player = CharacterPlayer:FindFirstChild(player)
+    if Player then
+      local HumanoidRootPart = Player:FindFirstChild("HumanoidRootPart")
+      if HumanoidRootPart then
+        local position = HumanoidRootPart.Position
+        local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
+        local rotation = Vector3.new(-90, 0, 180)
+
+        if Character and Character:FindFirstChild("HumanoidRootPart") then
+          Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
+        end
+      end
+      task.wait()
+    end
   end
 end
 
