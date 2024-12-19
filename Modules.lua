@@ -971,20 +971,23 @@ end
 function RaelHubMemeSea.TeleportToPlayer(value, player)
   getgenv().RaelHubTeleportPlayer = value
   while getgenv().RaelHubTeleportPlayer do
-    local Player = CharacterPlayer:FindFirstChild(player)
-    if Player then
-      local HumanoidRootPart = Player:FindFirstChild("HumanoidRootPart")
-      if HumanoidRootPart then
-        local position = HumanoidRootPart.Position
-        local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
-        local rotation = Vector3.new(-90, 0, 180)
+    pcall(function()
+      local Player = CharacterPlayer:FindFirstChild(player)
+      if Player then
+        local HumanoidRootPart = Player:FindFirstChild("HumanoidRootPart")
+        if HumanoidRootPart then
+            local position = HumanoidRootPart.Position
+          local altura = position + Vector3.new(0, getgenv().HeightPlayer, 0)
+          local rotation = Vector3.new(-90, 0, 180)
 
-        if Character and Character:FindFirstChild("HumanoidRootPart") then
-          Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
+          if Character and Character:FindFirstChild("HumanoidRootPart") then
+            Character.HumanoidRootPart.CFrame = CFrame.new(altura) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
+          end
         end
+        task.wait()
       end
-      task.wait()
-    end
+    end)
+    task.wait()
   end
 end
 
