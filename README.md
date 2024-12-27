@@ -21,6 +21,11 @@ getgenv().EquipStyle = "Melee"
 getgenv().EquipStyle = "Weapons"
 ```
 <br></br>
+<strong>Global variable modify character height in farm</strong>
+```lua
+getgenv().HeightPlayer = 7 -- you can modify this value
+```
+<br></br>
 <strong>Auto farm level</strong>
 ```lua
 -- Auto farm function
