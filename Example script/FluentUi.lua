@@ -115,7 +115,7 @@ Tabs.Main:AddDropdown("List Boss", {
   end
 })
 
-Tabs.Main:AddToggle("Auto farm boss", {
+Tabs.Main:AddToggle("Auto farm boss summoner", {
   Title = "Auto farm boss", 
   Default = false,
   Callback= function(Value)

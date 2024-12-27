@@ -49,3 +49,12 @@ local Value = true -- false (Only for you to disable the function)
 
 RaelHubMemeSea.AutoFarmMonsterSelected(MonsterName, Value)
 ```
+<br></br>
+<strong>Auto boss summoner</strong>
+```lua
+
+local BossSummonerName = "Giant Pumpkin" -- You can add other values: "Evil Noob" "Lord Sus"
+local Value = true -- false (Only for you to disable the function)
+
+RaelHubMemeSea.AutoFarmBoss(BossSummonerName, Value)
+```
