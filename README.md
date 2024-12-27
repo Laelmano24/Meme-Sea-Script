@@ -36,7 +36,7 @@ RaelHubMemeSea.AutoClicker(false)
 ```lua
 
 local MonsterName = "Floppa"
-local Value = true -- false
+local Value = true -- false (Only for you to disable the function)
 
 RaelHubMemeSea.AutoFarmMonsterSelected(MonsterName, Value)
 ```
