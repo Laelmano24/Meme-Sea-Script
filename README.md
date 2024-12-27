@@ -69,4 +69,4 @@ RaelHubMemeSea.AutoClickCat(true)
 RaelHubMemeSea.AutoClickCat(false)
 ```
 <br></br>
-<a href="https://github.com/Laelmano24/Meme-Sea-Script/blob/main/Example%20script/FluentUi.lua" target="self">
+<a href="https://github.com/Laelmano24/Meme-Sea-Script/blob/main/Example%20script/FluentUi.lua" target="self">Example 📃</a>
