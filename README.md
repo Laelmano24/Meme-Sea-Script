@@ -4,7 +4,7 @@
 <strong>Number of views</strong>
 <br>
 ![View Counter](https://hits.dwyl.com/Laelmano24/Meme-Sea-Script.svg?style=flat-square)
-<br>
+<br></br>
 <strong>Import modules from Rael Hub</strong>
 <br>
 ```lua
@@ -12,7 +12,7 @@
 local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/Modules.lua')))()
 ```
 <br></br>
-<strong>Features</strong>
+<strong>Auto farm</strong>
 ```lua
 -- Auto farm function
 
@@ -22,6 +22,7 @@ RaelHubMemeSea.AutoFarm(true)
 RaelHubMemeSea.AutoFarm(false)
 ```
 <br></br>
+<strong>Auto clicker</strong>
 ```lua
 -- Auto clicker function
 
@@ -29,4 +30,13 @@ RaelHubMemeSea.AutoFarm(false)
 RaelHubMemeSea.AutoClicker(true)
 -- Disable auto clicker
 RaelHubMemeSea.AutoClicker(false)
+```
+<br></br>
+<strong>Auto Farm selected monster</strong>
+```lua
+
+local MonsterName = "Floppa"
+local Value = true -- false
+
+RaelHubMemeSea.AutoFarmMonsterSelected(MonsterName, Value)
 ```
