@@ -12,6 +12,15 @@
 local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/Modules.lua')))()
 ```
 <br></br>
+<strong>Global variable to store the attack mode</strong>
+```lua
+-- Value for choosing fighting style
+getgenv().EquipStyle = "Melee"
+
+-- Value for choosing weapons
+getgenv().EquipStyle = "Weapons"
+```
+<br></br>
 <strong>Auto farm</strong>
 ```lua
 -- Auto farm function
