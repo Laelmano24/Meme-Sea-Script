@@ -58,3 +58,13 @@ local Value = true -- false (Only for you to disable the function)
 
 RaelHubMemeSea.AutoFarmBoss(BossSummonerName, Value)
 ```
+<br></br>
+<strong>Auto clicker cat</strong>
+```lua
+-- Auto clicker cat
+
+-- Enable auto clicker cat
+RaelHubMemeSea.AutoClickCat(true)
+-- Disable auto clicker cat
+RaelHubMemeSea.AutoClickCat(false)
+```
