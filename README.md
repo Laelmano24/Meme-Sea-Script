@@ -11,9 +11,9 @@
 -- Import the modules
 local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/Modules.lua')))()
 ```
-<br>
+<br></br>
 <strong>Features</strong>
-<br>
+<br></br>
 ```lua
 -- Auto farm function
 
@@ -22,7 +22,7 @@ RaelHubMemeSea.AutoFarm(true)
 -- Disable auto farm
 RaelHubMemeSea.AutoFarm(false)
 ```
-<br>
+<br></br>
 ```lua
 -- Auto clicker function
 
