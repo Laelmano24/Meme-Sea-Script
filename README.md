@@ -21,7 +21,7 @@ getgenv().EquipStyle = "Melee"
 getgenv().EquipStyle = "Weapons"
 ```
 <br></br>
-<strong>Auto farm</strong>
+<strong>Auto farm level</strong>
 ```lua
 -- Auto farm function
 
@@ -41,7 +41,7 @@ RaelHubMemeSea.AutoClicker(true)
 RaelHubMemeSea.AutoClicker(false)
 ```
 <br></br>
-<strong>Auto Farm selected monster</strong>
+<strong>Auto farm selected monster</strong>
 ```lua
 
 local MonsterName = "Floppa"
@@ -50,7 +50,7 @@ local Value = true -- false (Only for you to disable the function)
 RaelHubMemeSea.AutoFarmMonsterSelected(MonsterName, Value)
 ```
 <br></br>
-<strong>Auto boss summoner</strong>
+<strong>Auto farm boss summoner</strong>
 ```lua
 
 local BossSummonerName = "Giant Pumpkin" -- You can add other values: "Evil Noob" "Lord Sus"
