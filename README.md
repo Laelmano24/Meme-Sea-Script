@@ -13,7 +13,6 @@ local RaelHubMemeSea = loadstring(game:HttpGet(('https://raw.githubusercontent.c
 ```
 <br></br>
 <strong>Features</strong>
-<br></br>
 ```lua
 -- Auto farm function
 
