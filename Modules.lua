@@ -1017,13 +1017,14 @@ function RaelHubMemeSea.AutoEquipedAura(value)
 end
 
 function BringMob()
+  
+  if getgenv().MonsterName == "" then return end
+  
   for _, Monster in pairs(Monsters:GetChildren()) do
     
     local Monster_Location = Enemy_Location[getgenv().MonsterName]
     local MonsterRoot = Monster:FindFirstChild("HumanoidRootPart")
     local MonsterHumanoid = Monster:FindFirstChild("Humanoid")
-    
-    if getgenv().MonsterName == "" then return end
     
     for _, Bixo in ipairs(NoBosses) do
       if getgenv().MonsterName == Bixo then
