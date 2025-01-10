@@ -48,7 +48,7 @@ local GetFightingStyle = loadstring(game:HttpGet("https://raw.githubusercontent.
 local GetListMonsters = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea/refs/heads/main/MemeSea%20Monsters%20List.lua"))()
 local GetListQuest = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/GetListQuest.lua"))()
 local GeListFruitPower = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/GeListFruitPower.lua"))()
-local NoBosses = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/NoBosses"))()
+local NoBosses = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/Meme-Sea-Script/refs/heads/main/NoBosses.lua"))()
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
@@ -1023,30 +1023,33 @@ function BringMob()
     local MonsterRoot = Monster:FindFirstChild("HumanoidRootPart")
     local MonsterHumanoid = Monster:FindFirstChild("Humanoid")
     
-    if MonsterRoot and MonsterHumanoid and table.find(NoBosses, getgenv().MonsterName) then
+    if getgenv().MonsterName ~= "" then return end
+    
+    for _, Bixo in ipairs(NoBosses) do
+      if getgenv().MonsterName == Bixo then
+        
+        if MonsterRoot and MonsterHumanoid and Monster.Name == getgenv().MonsterName then
       
-      local Animation = MonsterHumanoid:FindFirstChild("Animation")
-      
-      if Monster.Name ~= getgenv().MonsterName then
-        return
-      end
-      
-      if Animation then
-        Animation:Destroy()
-        MonsterHumanoid:ChangeState(14)
-      end
-      
-      for _, Part in ipairs(Monster:GetDescendants()) do
-        if Part:IsA("BasePart") then
-          Part.CanCollide = false
+          local Animation = MonsterHumanoid:FindFirstChild("Animation")
+          
+          if Animation then
+            Animation:Destroy()
+            MonsterHumanoid:ChangeState(14)
+          end
+          
+          for _, Part in ipairs(Monster:GetDescendants()) do
+            if Part:IsA("BasePart") then
+              Part.CanCollide = false
+            end
+          end
+          
+          MonsterRoot.CFrame = Monster_Location.CFrame
+          
+          sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+          setscriptable(LocalPlayer, "SimulationRadius", true)
+          
         end
       end
-      
-      MonsterRoot.CFrame = Monster_Location.CFrame
-      
-      sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
-      setscriptable(LocalPlayer, "SimulationRadius", true)
-      
     end
   end
 end
